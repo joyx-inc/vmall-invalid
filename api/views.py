@@ -9,7 +9,7 @@ import json
 
 def list_store(request):
     jsonstr = '[]'
-
+#
     try:
         store_list = list(Store.objects.order_by('order'))
         jsonstr = json.dumps(store_list)
