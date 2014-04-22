@@ -4,8 +4,6 @@
 # Create your views here.
 from django.http.response import HttpResponse
 from api.models import *
-import top.api
-import top
 import json
 
 
