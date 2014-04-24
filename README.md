@@ -94,7 +94,7 @@ blablabla...
 | :-------- | --------:| :--: | :-- |
 | keyword  | string |  Y   |  关键字 或 一、二维码  |
 | type     |   int |  Y   |  查询类型：0：关键字查询 ，1：一、二维码查询  |
-| order      |    string | N  | 排序？？  
+| order      |    string | N  | 排序？？  |
 | amount     |   int |  Y   |  每页条数  |
 | page     |   int |  Y   |  请求的页数  |
 
