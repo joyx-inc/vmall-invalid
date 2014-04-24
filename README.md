@@ -25,7 +25,7 @@ blablabla...
         "mallCode":"<商场编号>",
         "mallName":"<商场名称>",
         "mallMapId":"<商场地图id>",
-        "interfaceVersion":"<接口版本号>",
+        "interfaceVersion":"<接口版本号>",  //
         "appName":"<app内部显示的名称>",    //待定！！
         "date":"<服务器当前时间>",          //主要用于秒杀活动等，客户端比较本地时间
         "isNewUser":<是否为新用户>,
@@ -277,6 +277,35 @@ blablabla...
         <商户对象基本信息>,
         "coupons":[{商户发布的优惠劵},{商户发布的优惠劵},{商户发布的优惠劵},...],
         "comments"[{商户的评论信息},{商户的评论信息},{商户的评论信息},...]
+
+        title: '商户名称',
+        logo: '商户LOGO',
+        id: '商户ID',
+        category: '商户类型',
+        floor: '楼层',
+        storeNo: '商户房间号',
+        description: '介绍',
+        followerCount: '关注人数',
+        特殊属性: '特殊属性',
+        特殊属性: '特殊属性',
+        特殊属性: '特殊属性',
+        特殊属性: '特殊属性',
+        coupons:[                           // 商户的优惠劵
+            {
+             id: '优惠ID',
+             title: '优惠标题',
+             type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+             tag: '优惠标签',
+             image: '优惠图',
+            }...
+        ],
+        comments:[                          // 商户的评论
+            {
+            author: "发布人名字",
+            content: "内容",
+            createTime: "发布时间"
+            },...
+        ]
     }
 
 #我的信息
