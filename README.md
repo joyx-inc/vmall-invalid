@@ -17,9 +17,16 @@ blablabla...
 
 客户端启动时的初始化接口，主要用于：
 
-* 获取客户端基本配置
+* 获取客户端基本信息
 * 用户注册、登录
-* 
+* ...
+
+> 用户注册登录：
+> 访问接口时，客户端提交生成的用户唯一标示uuid，服务器端判断该uuid是否存在，
+>       * uuid**存在**，isNewUser:false,secretKey:null
+>       * uuid**不存在**，isNewUser:true,secretKey:<服务器端生成的对应秘钥>
+
+
 
 > 接口地址：api/<商场编号>/init?v=`<app版本号>`&uid=`<用户id>`
 > 请求方式：GET
@@ -32,10 +39,10 @@ blablabla...
         "mallName":"<商场名称>",
         "mallMapId":"<商场地图id>",
         "interfaceVersion":"<接口版本号>",
-        "appName":"<app内部显示的名称>",    //待定！！
-        "date":"<服务器当前时间>",          //主要用于秒杀活动等，客户端比较本地时间
+        "appName":"<app内部显示的名称>",       //待定！！
+        "date":"<服务器当前时间>",             //主要用于秒杀活动等，客户端比较本地时间
         "isNewUser":<是否为新用户>,
-        "secretKey":"<私钥>"                //如果isNewUser==true,则返回secretKey，否则secretKey为空
+        "secretKey":"<私钥>"                  //如果isNewUser==true,则返回secretKey，否则secretKey为空
     }
     
 免费WIFI接口？？
