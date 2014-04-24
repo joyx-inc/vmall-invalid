@@ -139,6 +139,8 @@ blablabla...
 > 请求头：Authorization:<签名串>
 
 **查询参数：**
+
+
 | key       |    类型   | required  | 描述  |
 | :-------- | --------:| :--: | :-- |
 | cid  | string |  N   |  分类id  |
@@ -240,6 +242,8 @@ blablabla...
 > 请求头：Authorization:<签名串>
 
 **查询参数：**
+
+
 | key       |    类型   | required  | 描述  |
 | :-------- | --------:| :--: | :-- |
 | floor  | string |  N   |  楼层  |
