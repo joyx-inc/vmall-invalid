@@ -89,7 +89,7 @@ class Subject(BaseModel):
 
 
 # 首页轮播图
-class IndexRolling(BaseModel):
+class SlideShow(BaseModel):
     title = models.CharField(max_length=50)
     type = models.IntegerField(verbose_name=u"类型", default=1, choices=choices_subject_type)  #1:优惠; 2:商户; 3: 商品; 4: 网页
     image = models.CharField(max_length=150, verbose_name=u'图片地址')
@@ -152,6 +152,8 @@ class Store(BaseModel):
     address = models.CharField(verbose_name=u'地址', max_length=50, null=True, blank=True)
     homepage = models.CharField(verbose_name=u'WEB主页', max_length=50, null=True, blank=True)
     description = models.CharField(verbose_name=u'简介', max_length=500, null=True, blank=True)
+    floor = models.CharField(verbose_name=u'楼层', max_length=50, null=True, blank=True)
+    storeNo = models.CharField(verbose_name=u'房间号', max_length=50, null=True, blank=True)
     order = models.IntegerField(verbose_name=u'排序', default=100)
     mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
 

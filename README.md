@@ -15,13 +15,15 @@ blablabla...
 初始化接口
 ---------
 
-> 接口地址：api/init?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`
+> 接口地址：api/<商场编号>/init?v=`<app版本号>`&uid=`<用户id>`
 > 请求方式：GET
 > 请求头：无
 
     //JSON结构
     {
         "mallId":"<商场id>",
+        "mallCode":"<商场编号>",
+        "mallName":"<商场名称>",
         "mallMapId":"<商场地图id>",
         "interfaceVersion":"<接口版本号>",
         "appName":"<app内部显示的名称>",    //待定！！
@@ -33,7 +35,7 @@ blablabla...
 免费WIFI接口？？
 ---------
 
-> 接口地址：api/wifi?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`
+> 接口地址：api/<商场编号>/wifi?v=`<app版本号>`&uid=`<用户id>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
@@ -50,7 +52,7 @@ blablabla...
 ---------
 主页导航部分暂时写死，不通过接口返回！
 
-> 接口地址：api/main?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`
+> 接口地址：api/<商场编号>/main?v=`<app版本号>`&uid=`<用户id>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
@@ -58,9 +60,10 @@ blablabla...
     {
         "slideShow":[                       //轮播
             {
-                "itemType":"对象类型",      //可以是多种对象，优惠、商铺、商品等
+                "itemType":"对象类型",      //  #1:优惠; 2:商户; 3: 商品; 4: 网页
                 "itemId":"对象id",
                 "picUrl":"图片地址"
+                "link":"链接地址"           // itemType为4的时候才有值
             }
         ],
         "models":[                          //主页下方model部分
@@ -73,7 +76,8 @@ blablabla...
                     ...
                 ]
             }
-        ]
+        ],
+        date":"<服务器当前时间>"
     }
 
 搜索接口
@@ -81,7 +85,7 @@ blablabla...
 **暂时只搜索优惠**
 主要用于搜索接口，同时其他接口也可能重用，如：二维码、。。。
 
-> 接口地址：api/search?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`&`<查询条件>`
+> 接口地址：api/<商场编号>/search?v=`<app版本号>`&uid=`<用户id>`&`<查询条件>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
@@ -100,8 +104,25 @@ blablabla...
         "totalCount":<总页数>,
         "currentPage":<当前页>,
         "coupons":[                         //优惠列表
-            {优惠对象,优惠对象,优惠对象,优惠对象,...}
-        ]                    
+            {store:                         // 优惠对应的商户信息
+                {
+                title: '商户名称',
+                logo: '商户LOGO',
+                id: '商户ID',
+                category: '商户类型'
+                },
+             id: '优惠ID',
+             title: '优惠标题',
+             type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+             tag: '优惠标签',
+             image: '优惠图',
+             collectCount: '下载数',
+             commentCount: '评论数',
+             startTime: '开始时间',
+             endTime: '结束时间'
+             }
+
+        ]
     }
 
 ----------
@@ -111,7 +132,7 @@ blablabla...
 优惠接口
 ---------
 
-> 接口地址：api/coupon?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`&like=`<0：默认，1：关注的商户对应的优惠劵>`&`<查询参数>`
+> 接口地址：api/<商场编号>/coupon?v=`<app版本号>`&uid=`<用户id>`&like=`<0：默认，1：关注的商户对应的优惠劵>`&`<查询参数>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
@@ -129,7 +150,23 @@ blablabla...
         "totalCount":<总页数>,
         "currentPage":<当前页>,
         "coupons":[                         //优惠列表
-            {优惠对象,优惠对象,优惠对象,优惠对象,...}
+            {store:                         // 优惠对应的商户信息
+                {
+                title: '商户名称',
+                logo: '商户LOGO',
+                id: '商户ID',
+                category: '商户类型'
+                },
+             id: '优惠ID',
+             title: '优惠标题',
+             type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+             tag: '优惠标签',
+             image: '优惠图',
+             collectCount: '下载数',
+             commentCount: '评论数',
+             startTime: '开始时间',
+             endTime: '结束时间'
+             }
         ]                    
     }
 
@@ -137,15 +174,38 @@ blablabla...
 优惠详细信息接口
 ---------
 
-> 接口地址：api/coupon_detail?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`&couponid=`<优惠id>`
+> 接口地址：api/<商场编号>/coupon_detail?v=`<app版本号>`&uid=`<用户id>`&couponid=`<优惠id>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
 
     //JSON结构
-    {
-        优惠对象                 
-    }
+    {store:                         // 优惠对应的商户信息
+        {
+        title: '商户名称',
+        logo: '商户LOGO',
+        id: '商户ID',
+        category: '商户类型',
+        address: '商户地址',
+        floor: '楼层',
+        storeNo: '房间号',
+        tel: '商户电话',
+        mapid: '商户地址ID'
+        },
+     id: '优惠ID',
+     title: '优惠标题',
+     type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+     tag: '优惠标签',
+     images: ['优惠图'...],
+     description: '详情',
+     downloadLimit: '下载限制'      // 0: 不限制; 1: 限一次; -N: 一天N次,
+     downloadCount: '下载次数',     // limit为0或1时,返回所有下载次数; limit为-N时,返回当天下载次数
+     collectCount: '下载数',
+     commentCount: '评论数',
+     startTime: '开始时间',
+     endTime: '结束时间',
+     date":"<服务器当前时间>"
+     }
 
 
 #服务
@@ -153,13 +213,19 @@ blablabla...
 服务列表接口
 ---------
 
-> 接口地址：api/services?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`
+> 接口地址：api/<商场编号>/services?v=`<app版本号>`&uid=`<用户id>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
     //JSON结构
     [
         {服务对象},{服务对象},{服务对象},...
+        {
+            "itemType":"对象类型",      //  #1:内置功能; 0: 网页
+            "itemId":"对象id",
+            "picUrl":"图片地址"
+            "link":"链接地址"           // itemType为0的时候才有值
+        }
     ]
 
 #商户
@@ -167,7 +233,7 @@ blablabla...
 商户列表接口
 ---------
 
-> 接口地址：api/shop?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`&like=`<0：默认，1：关注的商户>`&`<查询参数>`
+> 接口地址：api/<商场编号>/shop?v=`<app版本号>`&uid=`<用户id>`&like=`<0：默认，1：关注的商户>`&`<查询参数>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
@@ -185,15 +251,23 @@ blablabla...
     {
         "totalCount":<总页数>,
         "currentPage":<当前页>,
-        "coupons":[                         //优惠列表
-            {{商户对象},{商户对象},{商户对象},{商户对象},...}
+        "list":[                         //优惠列表
+            {
+            title: '商户名称',
+            logo: '商户LOGO',
+            id: '商户ID',
+            category: '商户类型',
+            floor: '楼层',
+            storeNo: '商户房间号',
+            followerCount: '关注人数'
+            }...
         ]                    
     }
 
 商户详细信息接口
 ---------
 
-> 接口地址：api/shop_detail?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`&shopid=`<商户id>`
+> 接口地址：api/<商场编号>/shop_detail?v=`<app版本号>`&uid=`<用户id>`&shopid=`<商户id>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
@@ -210,7 +284,7 @@ blablabla...
 用户基本信息接口
 ---------
 
-> 接口地址：api/myinfo?v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`
+> 接口地址：api/<商场编号>/myinfo?v=`<app版本号>`&uid=`<用户id>`
 > 请求方式：GET
 > 请求头：Authorization:<签名串>
 
@@ -223,7 +297,7 @@ blablabla...
 修改用户基本信息接口
 ---------
 
-> 接口地址：api/myinfo?**update**&v=`<app版本号>`&mid=`<商场id>`&uid=`<用户id>`
+> 接口地址：api/<商场编号>/myinfo?**update**&v=`<app版本号>`&uid=`<用户id>`
 > 请求方式：**PUT**
 > 请求头：Authorization:<签名串>
 > 请求体：`{用户基本信息}`
