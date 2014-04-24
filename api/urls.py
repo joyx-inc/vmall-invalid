@@ -11,7 +11,8 @@ urlpatterns = patterns('api.views',
                        url(r'^list_store$', views.list_store, name='list_store'),
 
                        # APP初始化&首页
-                       url(r'^(?P<mcode>(\w+))/init$', views.init),
+                      # url(r'^(?P<mcode>(\w+))/init$', views.init),
+
                        url(r'^(?P<mcode>(\w+))/index$', views.index),
 
 )

@@ -15,7 +15,7 @@ vmall
 略
 
 ##2. 调用入口
-小蔡
+http://www.wise-mall.com
 
 ##3. 调用参数
 调用API ，必须传入系统参数和应用参数。系统参数详细介绍如下：
@@ -51,17 +51,35 @@ vmall
 
 系统支持MD5加密方式:
 
-      md5：将secret 拼接到参数字符串头、尾进行md5加密后，再转化成大写，格式是：base64(md5(secretkey1value1key2value2...secret))
+      md5：将secret 拼接到参数字符串头、将mall_code拼接到串尾进行md5加密后，再转化成大写，格式是：base64(md5(secretkey1value1key2value2...{mall_code}))
 
       注：JAVA中MD5是对字节数组加密，加密结果是16字节，我们需要的是32位的大写字符串，图片参数不用加入签名中
 
 
 校验规则算法：
 
-		签名算法采用Hmac-md5，hmac（secret+"app_key"+app_key+"timestamp"+timestamp+secret, secret）
-		原始字符串：secret+"app_key"+app_key+"timestamp"+timestamp+secret，加密串是secret，
+		签名算法采用Hmac-md5，hmac（secret+"app_key"+app_key+"timestamp"+timestamp+...+{mall_code}, secret）
+		原始字符串：secret+"app_key"+app_key+"timestamp"+timestamp+...+secret，加密串是secret，
 		其中timestamp(时间戳格式为13位数字类型，例如：1333275943000,位数不够可使用“0”补足)这部分工作必须在服务端处理。
 
+
+###3.3[错误消息](id:anchor_init_errmsg)
+接口调用出错时统一返回如下消息体:
+
+>
+    //JSON结构
+    {
+        "error": 1,                     // 发生错误时,error字段为1
+        "errorCode":"<错误编号>",
+        "errorMsg":"<错误消息>"
+    }
+>
+
+####错误消息定义<待完善>
+|编号		|描述		|
+| :--------: | :-- |
+|1001 		|	非法调用
+|1001 		|	版本太低啦~~~~~~~~~
 
 ----------
 #基础接口部分
@@ -86,10 +104,8 @@ vmall
 ####接口：
 
 
-> 接口地址：api/<商场编号>/init?`<系统参数>`
-> 
+> 接口地址：init/<商场编号>?`<系统参数>`
 > 请求方式：GET
-> 
 > 响应体：
 > 
     //JSON结构
@@ -98,10 +114,10 @@ vmall
         "mallCode":"<商场编号>",
         "mallName":"<商场名称>",
         "mallMapId":"<商场地图id>",
-        "appName":"<app内部显示的名称>",    //待定！！
-        "date":"<服务器当前时间>",          //主要用于秒杀活动等，客户端比较本地时间
+        "appName":"<app内部显示的名称>",       //待定！！
+        "date":"<服务器当前时间>",             //主要用于秒杀活动等，客户端比较本地时间
         "isNewUser":<是否为新用户>,
-        "secretKey":"<私钥>"                  //如果isNewUser==true,则返回secretKey，否则secretKey为空
+        "secretKey":"<私钥>"                   //如果isNewUser==true,则返回secretKey，否则secretKey为空
     }
     
 >
@@ -116,11 +132,7 @@ vmall
 **小蔡来定吧**
 
 > 接口地址：api/<商场编号>/wifi?`<系统参数>`
-> 
 > 请求方式：GET
-> 
-> 请求头：Authorization:<签名串>
-> 
 > 响应体：
 > 
 	//JSON结构
@@ -137,7 +149,6 @@ vmall
 
 > 接口地址：api/<商场编号>/main?`<系统参数>`
 > 请求方式：GET
-> 请求头：Authorization:<签名串>
 
     //JSON结构
     {
@@ -170,7 +181,6 @@ vmall
 
 > 接口地址：api/<商场编号>/search?`<系统参数>`&`<查询条件>`
 > 请求方式：GET
-> 请求头：Authorization:<签名串>
 
 **查询条件：**
 
@@ -219,7 +229,6 @@ vmall
 
 > 接口地址：api/<商场编号>/coupon?`<系统参数>`&like=`<0：默认，1：关注的商户对应的优惠劵>`&`<查询参数>`
 > 请求方式：GET
-> 请求头：Authorization:<签名串>
 
 **查询参数：**
 
@@ -263,7 +272,6 @@ vmall
 
 > 接口地址：api/<商场编号>/coupon_detail?`<系统参数>`&couponid=`<优惠id>`
 > 请求方式：GET
-> 请求头：Authorization:<签名串>
 
 
     //JSON结构
@@ -302,7 +310,6 @@ vmall
 
 > 接口地址：api/<商场编号>/services?`<系统参数>`
 > 请求方式：GET
-> 请求头：Authorization:<签名串>
 
     //JSON结构
     [
@@ -322,7 +329,6 @@ vmall
 
 > 接口地址：api/<商场编号>/shop?`<系统参数>`&like=`<0：默认，1：关注的商户>`&`<查询参数>`
 > 请求方式：GET
-> 请求头：Authorization:<签名串>
 
 **查询参数：**
 
@@ -358,7 +364,6 @@ vmall
 
 > 接口地址：api/<商场编号>/shop_detail?`<系统参数>`&shopid=`<商户id>`
 > 请求方式：GET
-> 请求头：Authorization:<签名串>
 
 
     //JSON结构
@@ -404,7 +409,6 @@ vmall
 
 > 接口地址：api/<商场编号>/myinfo?`<系统参数>`
 > 请求方式：GET
-> 请求头：Authorization:<签名串>
 
 
     //JSON结构
@@ -417,7 +421,6 @@ vmall
 
 > 接口地址：api/<商场编号>/myinfo?**update**&`<系统参数>`
 > 请求方式：**PUT**
-> 请求头：Authorization:<签名串>
 > 请求体：`{用户基本信息}`
 > 
 > **响应：**

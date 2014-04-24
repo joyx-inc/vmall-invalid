@@ -8,6 +8,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
                        # Examples:
                        # url(r'^$', 'vmall.views.home', name='home'),
+
+                       url(r'^init/(?P<mcode>(\w+))', 'api.views.init'),
+
                        url(r'^api/', include('api.urls')),
                        url(r'^admin/app/', include('admin.urls')),
 

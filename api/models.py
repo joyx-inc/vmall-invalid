@@ -36,6 +36,7 @@ class Mall(BaseModel):
     class Meta:
         verbose_name = '商场'
         verbose_name_plural = '商场列表'
+        db_table='t_mall'
 
 # 标签
 class Tag(BaseModel):
@@ -58,6 +59,7 @@ class Tag(BaseModel):
     class Meta:
         verbose_name = '标签'
         verbose_name_plural = '标签列表'
+        db_table='t_tag'
 
 
 # 主题
@@ -86,6 +88,7 @@ class Subject(BaseModel):
     class Meta:
         verbose_name = '主题'
         verbose_name_plural = '主题列表'
+        db_table='t_subject'
 
 
 # 首页轮播图
@@ -103,6 +106,10 @@ class SlideShow(BaseModel):
 
     def type_desc(self):
         return dict_type[self.type]
+    class Meta:
+        verbose_name = '首页轮播图'
+        verbose_name_plural = '首页轮播图列表'
+        db_table='t_slide_show'
 
 
 # 用户
@@ -127,6 +134,7 @@ class User(BaseModel):
     class Meta:
         verbose_name = '用户'
         verbose_name_plural = '用户列表'
+        db_table='t_user'
 
 
 # 银行列表
@@ -139,6 +147,7 @@ class Bank(BaseModel):
     class Meta:
         verbose_name = '银行'
         verbose_name_plural = '银行列表'
+        db_table='t_bank'
 
 
 # 商户
@@ -167,6 +176,7 @@ class Store(BaseModel):
     class Meta:
         verbose_name = '商户'
         verbose_name_plural = '商户列表'
+        db_table='t_store'
 
     @staticmethod
     def serialize(obj):
@@ -204,6 +214,7 @@ class Goods(BaseModel):
     class Meta:
         verbose_name = '商品'
         verbose_name_plural = '商品列表'
+        db_table='t_goods'
 
 
 # 优惠促销
@@ -232,6 +243,7 @@ class Promotion(BaseModel):
     class Meta:
         verbose_name = '优惠'
         verbose_name_plural = '优惠列表'
+        db_table='t_promotion'
 
 
 # 优惠信息图片
@@ -239,12 +251,16 @@ class PromotionImage(BaseModel):
     promotion = models.ForeignKey(Promotion, verbose_name=u'所属优惠')
     image = models.CharField(max_length=150, verbose_name=u'图片地址')
     order = models.IntegerField(verbose_name=u'排序', default=100)
+    class Meta:
+        db_table='t_promotion_image'
 
 
 # 优惠银行
 class PromotionBank(BaseModel):
     promotion = models.ForeignKey(Promotion, verbose_name=u'所属优惠')
     bank = models.ForeignKey(Bank, verbose_name=u'银行卡')
+    class Meta:
+        db_table='t_promotion_bank'
 
 
 # 优惠分享
@@ -252,6 +268,8 @@ class PromotionShare(BaseModel):
     promotion = models.ForeignKey(Promotion, verbose_name=u'优惠')
     share_type = models.CharField(max_length=10, verbose_name=u'分享平台')
     user = models.ForeignKey(User, verbose_name=u'用户')
+    class Meta:
+        db_table='t_promotion_share'
 
 
 # 用户下载/关注的优惠券
@@ -260,6 +278,8 @@ class UserPromotion(BaseModel):
     promotion = models.ForeignKey(Promotion, verbose_name=u'优惠')
     type = models.IntegerField(default=1, verbose_name=u'类型,0: 关注; 1: 下载', choices=(('0', '关注'), ('1', '下载')))
     promotion_code = models.CharField(max_length=20, null=True, blank=True)
+    class Meta:
+        db_table='t_user_promotion'
 
 
 # 用户拥有的银行卡
@@ -267,12 +287,16 @@ class UserBankCard(BaseModel):
     user = models.ForeignKey(User, verbose_name=u'用户')
     bank = models.ForeignKey(Bank, verbose_name=u'银行卡')
     card_num = models.CharField(max_length=20, verbose_name=u'卡号')
+    class Meta:
+        db_table='t_user_bank_card'
 
 
 class StoreFollower(BaseModel):
     store = models.ForeignKey(Store, verbose_name=u'商户')
     user = models.ForeignKey(User, verbose_name=u'用户')
 
+    class Meta:
+        db_table='t_store_follower'
 
 class Comment(BaseModel):
     title = models.CharField(max_length=50)
@@ -288,20 +312,28 @@ class Comment(BaseModel):
     def __str__(self):
         return "(%s) %s" % (self.user_name, self.content)
 
+    class Meta:
+        db_table='t_comment'
 
 class SubjectPromotion(BaseModel):
     item = models.ForeignKey(Promotion, verbose_name=u'优惠')
     subject = models.ForeignKey(Subject, verbose_name=u'所属主题')
 
+    class Meta:
+        db_table='t_subject_promotion'
 
 class SubjectStore(BaseModel):
     item = models.ForeignKey(Store, verbose_name=u'商户')
     subject = models.ForeignKey(Subject, verbose_name=u'所属主题')
+    class Meta:
+        db_table='t_subject_store'
 
 
 class SubjectGoods(BaseModel):
     item = models.ForeignKey(Goods, verbose_name=u'商品')
     subject = models.ForeignKey(Subject, verbose_name=u'所属主题')
+    class Meta:
+        db_table='t_subject_goods'
 
 
 class Category(BaseModel):
@@ -316,11 +348,14 @@ class Category(BaseModel):
     class Meta:
         verbose_name = '分类'
         verbose_name_plural = '分类列表'
+        db_table='t_category'
 
 
 class StoreCategory(BaseModel):
     store = models.ForeignKey(Store, verbose_name=u'商户')
     category = models.ForeignKey(Category, verbose_name=u'分类')
+    class Meta:
+        db_table='t_store_category'
 
 
 class SearchKeyword(BaseModel):
@@ -333,6 +368,7 @@ class SearchKeyword(BaseModel):
     class Meta:
         verbose_name = '搜索关键字'
         verbose_name_plural = '关键字列表'
+        db_table='t_search_keyword'
 
 
 '''
