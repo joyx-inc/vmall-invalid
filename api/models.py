@@ -28,6 +28,7 @@ class Mall(BaseModel):
     name = models.CharField(max_length=50, verbose_name=u'商场名称', )
     logo = models.CharField(max_length=50, verbose_name=u'商场LOGO', )
     mall_code = models.CharField(max_length=50, verbose_name=u'商场编号', )
+    mall_map_id = models.CharField(max_length=50, verbose_name=u'商场地图ID', )
     app_name = models.CharField(max_length=50, verbose_name=u'商场APP名称', )
 
     def __unicode__(self):
@@ -115,7 +116,7 @@ class SlideShow(BaseModel):
 # 用户
 class User(BaseModel):
     name = models.CharField(verbose_name=u'姓名', max_length=50)
-    gender = models.IntegerField(verbose_name=u'性别', choices=choices_gender)
+    gender = models.IntegerField(verbose_name=u'性别', choices=choices_gender, default=1)
     deviceId = models.CharField(verbose_name=u'设备编码', max_length=50)
     app_secret = models.CharField(verbose_name=u'app_secret', max_length=20, null=True, blank=True)
     mobile = models.CharField(verbose_name=u'手机号', max_length=20, null=True, blank=True)

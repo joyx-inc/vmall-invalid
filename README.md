@@ -114,6 +114,7 @@ http://www.wise-mall.com
         "mallCode":"<商场编号>",
         "mallName":"<商场名称>",
         "mallMapId":"<商场地图id>",
+        "mallLogo":"<商场Logo>",               // logo地址
         "appName":"<app内部显示的名称>",       //待定！！
         "date":"<服务器当前时间>",             //主要用于秒杀活动等，客户端比较本地时间
         "isNewUser":<是否为新用户>,
@@ -312,15 +313,20 @@ http://www.wise-mall.com
 > 请求方式：GET
 
     //JSON结构
-    [
+    {
+        totalCount: "总数"
+        services:[
         {服务对象},{服务对象},{服务对象},...
         {
+            "name":"对象名称",
             "itemType":"对象类型",      //  #1:内置功能; 0: 网页
             "itemId":"对象id",
             "picUrl":"图片地址"
             "link":"链接地址"           // itemType为0的时候才有值
         }
     ]
+    }
+
 
 #商户
 
