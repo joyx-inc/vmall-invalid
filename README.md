@@ -21,17 +21,18 @@ blablabla...
 * 用户注册、登录
 * ...
 
-> ####用户注册登录：
-> 访问接口时，客户端提交生成的用户唯一标示uuid，服务器端判断该uuid是否存在
-> >      uuid 存在，isNewUser:false,secretKey:null
-> >      installuuid 不存在，isNewUser:true,secretKey:<服务器端生成的对应秘钥>
->
+####用户注册登录：
+ 访问接口时，客户端提交生成的用户唯一标示uuid，服务器端判断该uuid是否存在
+>      uuid 存在，isNewUser:false,secretKey:null
+>      installuuid 不存在，isNewUser:true,secretKey:<服务器端生成的对应秘钥>
 
 
-
+####接口：
 
 > 接口地址：api/<商场编号>/init?v=`<app版本号>`&uid=`<用户id>`
+> 
 > 请求方式：GET
+> 
 > 请求头：无
 
     //JSON结构
@@ -46,6 +47,7 @@ blablabla...
         "isNewUser":<是否为新用户>,
         "secretKey":"<私钥>"                  //如果isNewUser==true,则返回secretKey，否则secretKey为空
     }
+    
     
 免费WIFI接口？？
 ---------
