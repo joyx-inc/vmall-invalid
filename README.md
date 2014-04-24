@@ -21,10 +21,12 @@ blablabla...
 * 用户注册、登录
 * ...
 
-> 用户注册登录：
-> 访问接口时，客户端提交生成的用户唯一标示uuid，服务器端判断该uuid是否存在，
->       * uuid**存在**，isNewUser:false,secretKey:null
->       * uuid**不存在**，isNewUser:true,secretKey:<服务器端生成的对应秘钥>
+> ####用户注册登录：
+> 访问接口时，客户端提交生成的用户唯一标示uuid，服务器端判断该uuid是否存在
+> >      uuid 存在，isNewUser:false,secretKey:null
+> >      installuuid 不存在，isNewUser:true,secretKey:<服务器端生成的对应秘钥>
+>
+
 
 
 
