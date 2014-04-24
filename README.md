@@ -29,7 +29,7 @@ vmall
 |timestamp 		|string	|Y	|	时间戳，服务端允许客户端请求时间误差为6分钟。
 |userid 		|string	|Y	|	用户uuid
 |v 		|string	|Y	|	客户端版本号
-|sign	|string	|Y	|对 API 输入参数进行 md5 加密获得，详细参考如下 [签名sign](#anchor_init_sign)
+|sign	|string	|Y	|对 API 输入参数进行 md5 加密获得，详细参考如下 [签名sign](#32签名sign)
 
 ####应用参数
 |名称		|类型		|是否必须 	|描述		|
@@ -79,14 +79,14 @@ vmall
 ####用户注册登录：
 访问接口时，客户端提交生成的用户唯一标示uuid，服务器端判断该uuid是否存在
 
-> *  uuid**存在**:isNewUser:false,secretKey:null
-> *  uuid**不存在**:isNewUser:true,secretKey:<服务器端生成的对应秘钥>
+> *  uuid存在:isNewUser:false,secretKey:null
+> *  uuid不存在:isNewUser:true,secretKey:<服务器端生成的对应秘钥>
 
 
 ####接口：
 
 
-> 接口地址：api/<商场编号>/init?v=`<app版本号>`&uid=`<用户id>`
+> 接口地址：api/<商场编号>/init?`<[系统参数](#系统参数)>`&uid=`<用户id>`
 > 
 > 请求方式：GET
 > 
