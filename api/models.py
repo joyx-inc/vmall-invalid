@@ -1,5 +1,6 @@
 #!python
 #encoding:utf-8
+import datetime
 from django.db import models
 
 # Create your models here.
@@ -23,11 +24,27 @@ class BaseModel(models.Model):
         abstract = True
 
 
+class Mall(BaseModel):
+    name = models.CharField(max_length=50, verbose_name=u'商场名称', )
+    logo = models.CharField(max_length=50, verbose_name=u'商场LOGO', )
+    mall_code = models.CharField(max_length=50, verbose_name=u'商场编号', )
+    app_name = models.CharField(max_length=50, verbose_name=u'商场APP名称', )
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '商场'
+        verbose_name_plural = '商场列表'
+
 # 标签
 class Tag(BaseModel):
     name = models.CharField(max_length=20, verbose_name=u'标签名称', )
     type = models.IntegerField(verbose_name=u"标签类型", default=1, choices=choices_subject_type)
+    group = models.CharField(verbose_name=u'分组', max_length=20, null=True, blank=True)
     description = models.CharField(verbose_name=u'备注', max_length=100, null=True, blank=True)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
+
 
     def __str__(self):
         return "%s (%s)" % (self.name, dict_type[self.type])
@@ -54,6 +71,7 @@ class Subject(BaseModel):
     end_time = models.DateTimeField(verbose_name=u'结束时间')
     description = models.CharField(verbose_name=u'描述', max_length=1000, null=True, blank=True)
     order = models.IntegerField(verbose_name=u'排序', default=100)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
 
 
     def __str__(self):
@@ -78,6 +96,7 @@ class IndexRolling(BaseModel):
     url = models.CharField(max_length=150, verbose_name=u'链接地址', null=True, blank=True)
     item_id = models.IntegerField(verbose_name=u'对象ID', null=True, blank=True)
     order = models.IntegerField(verbose_name=u'排序', default=100)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
 
     def __str__(self):
         return self.title
@@ -96,6 +115,7 @@ class User(BaseModel):
     club_card = models.CharField(verbose_name=u'会员卡号', max_length=50, null=True, blank=True)
     login_name = models.CharField(verbose_name=u'登录名', max_length=20, null=True, blank=True)
     login_password = models.CharField(verbose_name=u'登录密码', max_length=50, null=True, blank=True)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
 
 
     def __str__(self):
@@ -133,6 +153,7 @@ class Store(BaseModel):
     homepage = models.CharField(verbose_name=u'WEB主页', max_length=50, null=True, blank=True)
     description = models.CharField(verbose_name=u'简介', max_length=500, null=True, blank=True)
     order = models.IntegerField(verbose_name=u'排序', default=100)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
 
 
     def __str__(self):
@@ -144,6 +165,17 @@ class Store(BaseModel):
     class Meta:
         verbose_name = '商户'
         verbose_name_plural = '商户列表'
+
+    @staticmethod
+    def serialize(obj):
+        return {
+            "id": obj.id,
+            "title": obj.title,
+            "create_date": obj.create_date.strftime('%Y-%m-%d %H:%M:%S') if isinstance(obj.create_date,
+                                                                                       datetime.datetime) else None,
+            "follower_count": obj.follower_count,
+            "comment_count": obj.comment_count,
+        }
 
 
 # 商品
@@ -158,6 +190,7 @@ class Goods(BaseModel):
     description = models.TextField(max_length=2048, verbose_name=u'描述', null=True, blank=True)
     cover_img = models.CharField(max_length=150, verbose_name=u'封面图', null=True, blank=True)
     order = models.IntegerField(verbose_name=u'排序', default=100)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
 
 
     def __str__(self):
@@ -174,9 +207,10 @@ class Goods(BaseModel):
 # 优惠促销
 class Promotion(BaseModel):
     title = models.CharField(max_length=50)
-    type = models.IntegerField(verbose_name=u'优惠类型', default=1, choices=choices_promotion_type) #,1: 优惠活动; 2: 优惠券; 3: 团购;
+    type = models.IntegerField(verbose_name=u'优惠类型', default=1,
+                               choices=choices_promotion_type)  #,1: 优惠活动; 2: 优惠券; 3: 团购;
     store = models.ForeignKey(Store, verbose_name=u'所属商户', null=True)
-    sub_type = models.IntegerField(verbose_name='下级分类', null=True, blank=True) #用于细分优惠券类型
+    sub_type = models.IntegerField(verbose_name='下级分类', null=True, blank=True)  #用于细分优惠券类型
     is_bank_special = models.BooleanField(default=False, verbose_name=u'是否银行卡专享', choices=choices_yes_or_no)
     start_time = models.DateTimeField(verbose_name=u'开始时间')
     end_time = models.DateTimeField(verbose_name=u'结束时间')
@@ -185,6 +219,7 @@ class Promotion(BaseModel):
     collect_count = models.IntegerField(verbose_name=u'下载人数', default=0)
     comment_count = models.IntegerField(verbose_name=u'评论人数', default=0)
     order = models.IntegerField(verbose_name=u'排序', default=100)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
 
     def __str__(self):
         return self.title
@@ -245,6 +280,7 @@ class Comment(BaseModel):
     user = models.ForeignKey(User, verbose_name=u'用户')
     user_name = models.CharField(max_length=50)
     content = models.CharField(max_length=500)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
 
 
     def __str__(self):
@@ -264,6 +300,37 @@ class SubjectStore(BaseModel):
 class SubjectGoods(BaseModel):
     item = models.ForeignKey(Goods, verbose_name=u'商品')
     subject = models.ForeignKey(Subject, verbose_name=u'所属主题')
+
+
+class Category(BaseModel):
+    name = models.CharField(max_length=50)
+    parentId = models.IntegerField(verbose_name=u'父级节点', default=0)
+    description = models.TextField(max_length=100, verbose_name=u'描述', null=True, blank=True)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = '分类'
+        verbose_name_plural = '分类列表'
+
+
+class StoreCategory(BaseModel):
+    store = models.ForeignKey(Store, verbose_name=u'商户')
+    category = models.ForeignKey(Category, verbose_name=u'分类')
+
+
+class SearchKeyword(BaseModel):
+    keyword = models.CharField(max_length=50)
+    mall = models.ForeignKey(Mall, verbose_name=u'所属商场')
+
+    def __unicode__(self):
+        return self.keyword
+
+    class Meta:
+        verbose_name = '搜索关键字'
+        verbose_name_plural = '关键字列表'
 
 
 '''
