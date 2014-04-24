@@ -29,7 +29,7 @@ vmall
 |timestamp 		|string	|Y	|	时间戳，服务端允许客户端请求时间误差为6分钟。
 |userid 		|string	|Y	|	用户uuid
 |v 		|string	|Y	|	客户端版本号
-|sign	|string	|Y	|对 API 输入参数进行 md5 加密获得，详细参考如下 [签名sign](anchor_init_sign)
+|sign	|string	|Y	|对 API 输入参数进行 md5 加密获得，详细参考如下 [签名sign](#anchor_init_sign)
 
 ####应用参数
 |名称		|类型		|是否必须 	|描述		|
