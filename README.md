@@ -16,6 +16,9 @@ vmall
 
 ##2. 调用入口
 http://www.wise-mall.com
+测试商场编号: bj001
+>http://www.wise-mall.com/api/bj001/coupon
+>http://www.wise-mall.com/init/bj001?userid=1234
 
 ##3. 调用参数
 调用API ，必须传入系统参数和应用参数。系统参数详细介绍如下：
