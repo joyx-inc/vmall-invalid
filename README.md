@@ -69,8 +69,7 @@ http://www.wise-mall.com
 >
     //JSON结构
     {
-        "error": 1,                     // 发生错误时,error字段为1
-        "errorCode":"<错误编号>",
+        "errorCode":"<错误编号>",       // 发生错误时,errorCode非空
         "errorMsg":"<错误消息>"
     }
 >
@@ -304,6 +303,24 @@ http://www.wise-mall.com
      }
 
 
+优惠券下载接口
+---------
+
+> 接口地址：api/<商场编号>/coupon_download?`<系统参数>`&couponid=`<优惠id>`
+> 请求方式：GET
+
+
+    //JSON结构
+    {
+     status: '下载结果',            // 1: 成功; 2: X; 3: 失败-已下载过; 4: 失败-不符合参与条件
+     msg: '提示信息',               // 失败的提示信息
+     coupon_code: '优惠代码',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+     date":"<服务器当前时间>"
+     }
+
+
+
+
 #服务
 
 服务列表接口
@@ -418,9 +435,14 @@ http://www.wise-mall.com
 
 
     //JSON结构
-    [
-        <用户基本信息>
-    ]
+    {
+        name: "姓名",
+        gender: "性别",
+        nick_name: "昵称",
+        mobile: "手机号",
+        club_card: "会员卡号",
+    }
+
 
 修改用户基本信息接口
 ---------
@@ -437,24 +459,179 @@ response code:200 OK
 
 我的优惠劵接口
 ---------
+> 接口地址：api/<商场编号>/myinfo/coupons_download?`<系统参数>`
+> 请求方式：GET
+
+
+    //JSON结构
+    {
+        "totalCount":<总页数>,
+        "currentPage":<当前页>,
+        "coupons":[                         //优惠列表
+            {store:                         // 优惠对应的商户信息
+                {
+                title: '商户名称',
+                logo: '商户LOGO',
+                id: '商户ID',
+                category: '商户类型'
+                },
+             id: '优惠ID',
+             title: '优惠标题',
+             coupon_code: '优惠券代码',
+             coupon_status: '优惠券状态',  // ('0', '未消费'), ('1', '已消费')
+             startTime: '开始时间',
+             endTime: '结束时间'
+             }
+        ]
+    }
+
 
 
 消费记录接口
 ---------
 
 
+
 我关注的商家接口
 ---------
+
+> 接口地址：api/<商场编号>/myinfo/shop?`<系统参数>`&`<查询参数>`
+> 请求方式：GET
+
+    //JSON结构
+    {
+        "totalCount":<总页数>,
+        "currentPage":<当前页>,
+        "list":[                         //优惠列表
+            {
+            title: '商户名称',
+            logo: '商户LOGO',
+            id: '商户ID',
+            category: '商户类型',
+            floor: '楼层',
+            storeNo: '商户房间号',
+            followerCount: '关注人数'
+            }...
+        ]
+    }
+
 
 我关注的商品接口？？？
 ---------
 
 我关注的优惠接口
 ---------
+> 接口地址：api/<商场编号>/myinfo/coupons_focus?`<系统参数>`&`<查询参数>`
+> 请求方式：GET
 
-绑定手机接口
+
+    //JSON结构
+    {
+        "totalCount":<总页数>,
+        "currentPage":<当前页>,
+        "coupons":[                         //优惠列表
+            {store:                         // 优惠对应的商户信息
+                {
+                title: '商户名称',
+                logo: '商户LOGO',
+                id: '商户ID',
+                category: '商户类型'
+                },
+             id: '优惠ID',
+             title: '优惠标题',
+             type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+             tag: '优惠标签',
+             image: '优惠图',
+             collectCount: '下载数',
+             commentCount: '评论数',
+             startTime: '开始时间',
+             endTime: '结束时间'
+             }
+             ...
+        ]
+    }
+
+
+绑定手机接口-发送短信
 ---------
+
+
+绑定手机接口-保存手机号
+---------
+
+
 
 绑定会员卡接口
 ---------
+> 接口地址：api/<商场编号>/myinfo/club_card?`<系统参数>`
+> 请求方式：GET
 
+    //JSON结构
+    {
+        "club_card":<会员卡号>,
+    }
+
+
+> 接口地址：api/<商场编号>/myinfo/club_card?`<系统参数>`&club_card=<卡号>
+> 请求方式：PUT
+
+    //JSON结构
+    {
+        "result":<发送结果>,
+    }
+
+绑定银行卡接口
+---------
+取银行列表
+> 接口地址：api/<商场编号>/myinfo/bank_list?`<系统参数>`
+> 请求方式：GET
+
+    //JSON结构
+    [
+        {
+        bank_id..<银行ID>
+        bank_name..<银行名称>
+        }
+        ...
+    ]
+
+取我的卡列表
+> 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`
+> 请求方式：GET
+
+    //JSON结构
+    [
+        {
+            id: <卡ID>,
+            bank_id: <银行Id>,
+            bank_name: <银行名称>,
+            card_num: <卡号>,
+        }
+    ]
+
+删除卡
+> 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`&card_id=<卡id>&card_id=<卡id>&card_id=<卡id>
+> 请求方式：DELETE
+
+    //JSON结构
+    {
+        "result":<发送结果>,
+    }
+
+新增卡
+> 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`&club_card=<卡号>&bank_id=<银行ID>
+> 请求方式：PUT
+
+    //JSON结构
+    {
+        "result":<发送结果>,
+    }
+
+
+消息推送/提示接口
+---------
+先确定有几种消息
+> 接口地址：api/<商场编号>/push/?`<系统参数>`
+> 请求方式：GET
+
+    //JSON结构

@@ -115,10 +115,11 @@ class SlideShow(BaseModel):
 
 # 用户
 class User(BaseModel):
-    name = models.CharField(verbose_name=u'姓名', max_length=50)
+    name = models.CharField(verbose_name=u'姓名', max_length=20)
     gender = models.IntegerField(verbose_name=u'性别', choices=choices_gender, default=1)
     deviceId = models.CharField(verbose_name=u'设备编码', max_length=50)
     app_secret = models.CharField(verbose_name=u'app_secret', max_length=20, null=True, blank=True)
+    nick_name = models.CharField(verbose_name=u'昵称', max_length=20, null=True, blank=True)
     mobile = models.CharField(verbose_name=u'手机号', max_length=20, null=True, blank=True)
     club_card = models.CharField(verbose_name=u'会员卡号', max_length=50, null=True, blank=True)
     login_name = models.CharField(verbose_name=u'登录名', max_length=20, null=True, blank=True)
@@ -278,7 +279,9 @@ class UserPromotion(BaseModel):
     user = models.ForeignKey(User, verbose_name=u'用户')
     promotion = models.ForeignKey(Promotion, verbose_name=u'优惠')
     type = models.IntegerField(default=1, verbose_name=u'类型,0: 关注; 1: 下载', choices=(('0', '关注'), ('1', '下载')))
-    promotion_code = models.CharField(max_length=20, null=True, blank=True)
+    coupon_code = models.CharField(max_length=20, null=True, blank=True)
+    coupon_status = models.IntegerField(verbose_name="优惠券消费状态", default=0)  # ('0', '未消费'), ('1', '已消费')
+    check_time = models.DateTimeField(verbose_name=u'消费时间',null=True, blank=True)
     class Meta:
         db_table='t_user_promotion'
 
