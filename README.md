@@ -120,7 +120,8 @@ http://www.wise-mall.com
         "appName":"<app内部显示的名称>",       //待定！！
         "date":"<服务器当前时间>",             //主要用于秒杀活动等，客户端比较本地时间
         "isNewUser":<是否为新用户>,
-        "secretKey":"<私钥>"                   //如果isNewUser==true,则返回secretKey，否则secretKey为空
+        "secretKey":"<私钥>",                   //如果isNewUser==true,则返回secretKey，否则secretKey为空
+        "club_card":"<会员卡号>"					//会员卡号
     }
     
 >
@@ -551,31 +552,24 @@ response code:200 OK
 
 绑定手机接口-发送短信
 ---------
+> 接口地址：api/<商场编号>/myinfo/send_sms?`<系统参数>`&phonenum=`<手机号>`
+> 请求方式：GET
 
 
 绑定手机接口-保存手机号
 ---------
-
+> 接口地址：api/<商场编号>/myinfo/save_phonenum?`<系统参数>`&phonenum=`<手机号>`&code=`<短信中的验证码>`
+> 请求方式：GET
 
 
 绑定会员卡接口
 ---------
-> 接口地址：api/<商场编号>/myinfo/club_card?`<系统参数>`
-> 请求方式：GET
-
-    //JSON结构
-    {
-        "club_card":<会员卡号>,
-    }
 
 
 > 接口地址：api/<商场编号>/myinfo/club_card?`<系统参数>`&club_card=<卡号>
 > 请求方式：PUT
 
-    //JSON结构
-    {
-        "result":<发送结果>,
-    }
+
 
 绑定银行卡接口
 ---------
@@ -610,19 +604,10 @@ response code:200 OK
 > 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`&card_id=<卡id>&card_id=<卡id>&card_id=<卡id>
 > 请求方式：DELETE
 
-    //JSON结构
-    {
-        "result":<发送结果>,
-    }
 
 新增卡
 > 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`&club_card=<卡号>&bank_id=<银行ID>
 > 请求方式：PUT
-
-    //JSON结构
-    {
-        "result":<发送结果>,
-    }
 
 
 消息推送/提示接口
