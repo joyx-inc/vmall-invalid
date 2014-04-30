@@ -129,19 +129,13 @@ http://www.wise-mall.com
 > 1. [系统参数](#系统参数)
 
     
-免费WIFI接口？？
+免费WIFI登陆接口
 ---------
 
-**小蔡来定吧**
 
 > 接口地址：api/<商场编号>/wifi?`<系统参数>`
 > 请求方式：GET
-> 响应体：
-> 
-	//JSON结构
-	{
-	   ??
-	}
+
 
 ----------
 #主页部分
@@ -192,7 +186,7 @@ http://www.wise-mall.com
 | :-------- | --------:| :--: | :-- |
 | keyword  | string |  Y   |  关键字 或 一、二维码  |
 | type     |   int |  Y   |  查询类型：0：关键字查询 ，1：一、二维码查询  |
-| order      |    string | N  | 排序？？  |
+| order      |    string | N  | 排序,如：name,asc 或 fav,desc    |
 | amount     |   int |  Y   |  每页条数  |
 | page     |   int |  Y   |  请求的页数  |
 
