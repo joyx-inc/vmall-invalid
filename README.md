@@ -320,6 +320,31 @@ http://www.wise-mall.com
      }
 
 
+优惠分类接口
+---------
+
+> 接口地址：api/<商场编号>/coupon/category?`<系统参数>`&page=<页数>&amount=<分页条数>
+> 请求方式：GET
+
+
+    //JSON结构
+    {
+        "totalCount":<总页数>,
+        "currentPage":<当前页>,
+        "categories":[                         //优惠列表
+             {
+             id: '分类ID',
+             name: '分类名称'
+             },
+             {
+             id: '分类ID',
+             name: '分类名称'
+             },
+             ...
+        ]                    
+    }
+
+
 
 
 #服务
@@ -425,6 +450,55 @@ http://www.wise-mall.com
             },...
         ]
     }
+
+商户楼层接口
+---------
+
+> 接口地址：api/<商场编号>/shop/floor?`<系统参数>`&page=<页数>&amount=<分页条数>
+> 请求方式：GET
+
+
+    //JSON结构
+    {
+        "totalCount":<总页数>,
+        "currentPage":<当前页>,
+        "floors":[                         //优惠列表
+             {
+             id: 'ID',
+             name: '名称'
+             },
+             {
+             id: 'ID',
+             name: '名称'
+             },
+             ...
+        ]                    
+    }
+
+商户分类接口
+---------
+
+> 接口地址：api/<商场编号>/shop/category?`<系统参数>`&page=<页数>&amount=<分页条数>
+> 请求方式：GET
+
+
+    //JSON结构
+    {
+        "totalCount":<总页数>,
+        "currentPage":<当前页>,
+        "categories":[                         //优惠列表
+             {
+             id: 'ID',
+             name: '名称'
+             },
+             {
+             id: 'ID',
+             name: '名称'
+             },
+             ...
+        ]                    
+    }
+
 
 #我的信息
 
