@@ -276,9 +276,10 @@ http://www.wise-mall.com
 > 接口地址：api/<商场编号>/coupon_detail?`<系统参数>`&couponid=`<优惠id>`
 > 请求方式：GET
 
+```json
 
     //JSON结构
-    {store:                         // 优惠对应的商户信息
+    {'store':                         // 优惠对应的商户信息
         {
         title: '商户名称',
         logo: '商户LOGO',
@@ -296,15 +297,17 @@ http://www.wise-mall.com
      tag: '优惠标签',
      images: ['优惠图'...],
      description: '详情',
-     downloadLimit: '下载限制'      // 0: 不限制; 1: 限一次; -N: 一天N次,
-     downloadCount: '下载次数',     // limit为0或1时,返回所有下载次数; limit为-N时,返回当天下载次数
-     collectCount: '下载数',
+     collectType: '下载方式'            // 0: 免费下, 1: 分享后下载
+     collectLimit: '限量'              // 0: 不限制; N: 限制下载N次,
+     collectRole: '下载规则'            // 待定, 目前返回空串,统一处理为每人限下载一次
+     userCollectCount: '我的下载次数',       // 根据role不同会有不同的处理情况,目前总是返回1.
+     collectCount: '下载数',            // 已下载总量
      commentCount: '评论数',
      startTime: '开始时间',
      endTime: '结束时间',
-     date":"<服务器当前时间>"
+     date:"<服务器当前时间>"
      }
-
+```
 
 优惠券下载接口
 ---------

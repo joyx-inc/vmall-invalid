@@ -9,7 +9,7 @@ from django.db import models
 dict_type = {0: '待审核', 1: '正常', -1: '删除'}
 dict_subject_type = {1: '优惠', 2: '商户', 3: '商品', 4: '网页'}
 choices_subject_type = ((1, '优惠'), (2, '商户'), (3, '商品'), (4, '网页'))
-choices_promotion_type = ((1, '优惠活动'), (3, '优惠券'), (3, '团购'))
+choices_promotion_type = ((1, '优惠活动'), (2, '优惠券'), (3, '团购'))
 choices_gender = ((1, '男'), (2, '女'))
 choices_yes_or_no = ((True, '是'), (False, '否'))
 
