@@ -80,9 +80,14 @@ http://www.wise-mall.com
 ####错误消息定义<待完善>
 |编号		|描述		|
 | :--------: | :-- |
+|E2001 		|	您查看的优惠信息不存在
+|E2002 		|	优惠券已下载过.
+|E2003 		|	不符合此优惠券的下载条件
+|E2004 		|	此优惠券不能下载
+|&nbsp; 	|	&nbsp;
 |E1000 		|	非法调用
 |E1001 		|	客户端版本太低.
-|E1002 		|	您查看的优惠信息不存在
+|E1002 		|	用户无效或未登录
 |&nbsp; 	|	&nbsp;
 |E1404 		|	接口地址不存在
 
@@ -214,6 +219,7 @@ http://www.wise-mall.com
              image: '优惠图',
              collectCount: '下载数',
              commentCount: '评论数',
+             focusCount: '关注数',
              startTime: '开始时间',
              endTime: '结束时间'
              }
@@ -244,6 +250,7 @@ http://www.wise-mall.com
 
     //JSON结构
     {
+        "followSize":<关注的商户数>,            // 当like为1时有此项
         "totalCount":<总页数>,
         "currentPage":<当前页>,
         "coupons":[                         //优惠列表
@@ -261,6 +268,7 @@ http://www.wise-mall.com
              image: '优惠图',
              collectCount: '下载数',
              commentCount: '评论数',
+             focusCount: '关注数',
              startTime: '开始时间',
              endTime: '结束时间'
              }
@@ -303,6 +311,7 @@ http://www.wise-mall.com
      userCollectCount: '我的下载次数',       // 根据role不同会有不同的处理情况,目前已下载返回1,未下载返回0.
      collectCount: '下载数',            // 已下载总量
      commentCount: '评论数',
+     focusCount: '关注数',
      startTime: '开始时间',
      endTime: '结束时间',
      date:"<服务器当前时间>"
@@ -327,8 +336,8 @@ http://www.wise-mall.com
 
 优惠分类接口
 ---------
-
-> 接口地址：api/<商场编号>/coupon/category?`<系统参数>`&page=<页数>&amount=<分页条数>
+与商户分类接口一致
+> 接口地址：api/<商场编号>/shop/category?`<系统参数>`&page=<页数>&amount=<分页条数>
 > 请求方式：GET
 
 
@@ -349,6 +358,19 @@ http://www.wise-mall.com
         ]                    
     }
 
+
+优惠关注接口
+---------
+
+> 接口地址：api/<商场编号>/coupon_focus/up?`<系统参数>`&couponid=`<优惠id>`
+> 请求方式：GET
+
+
+优惠关注取消接口
+---------
+
+> 接口地址：api/<商场编号>/coupon_focus/down?`<系统参数>`&couponid=`<优惠id>`
+> 请求方式：GET
 
 
 
@@ -406,8 +428,9 @@ http://www.wise-mall.com
             logo: '商户LOGO',
             id: '商户ID',
             category: '商户类型',
+            area: '楼区',
             floor: '楼层',
-            storeNo: '商户房间号',
+            roomNum: '商户房间号',
             followerCount: '关注人数'
             }...
         ]                    
@@ -431,7 +454,7 @@ http://www.wise-mall.com
         id: '商户ID',
         category: '商户类型',
         floor: '楼层',
-        storeNo: '商户房间号',
+        roomNum: '商户房间号',
         description: '介绍',
         followerCount: '关注人数',
         特殊属性: '特殊属性',
@@ -455,6 +478,24 @@ http://www.wise-mall.com
             },...
         ]
     }
+
+
+
+商户关注接口
+---------
+
+> 接口地址：api/<商场编号>/shop_focus/up?`<系统参数>`
+> 请求方式：POST
+> 请求参数: shopid=`<商户id,商户id...>`
+
+
+商户关注取消接口
+---------
+
+> 接口地址：api/<商场编号>/shop_focus/down?`<系统参数>`
+> 请求方式：POST
+> 请求参数: shopid=`<商户id,商户id...>`
+
 
 商户楼层接口
 ---------
@@ -589,7 +630,7 @@ response code:200 OK
             id: '商户ID',
             category: '商户类型',
             floor: '楼层',
-            storeNo: '商户房间号',
+            roomNum: '商户房间号',
             followerCount: '关注人数'
             }...
         ]
@@ -624,6 +665,7 @@ response code:200 OK
              image: '优惠图',
              collectCount: '下载数',
              commentCount: '评论数',
+             focusCount: '关注数',
              startTime: '开始时间',
              endTime: '结束时间'
              }
