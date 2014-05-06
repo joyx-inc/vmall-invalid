@@ -80,8 +80,11 @@ http://www.wise-mall.com
 ####错误消息定义<待完善>
 |编号		|描述		|
 | :--------: | :-- |
-|1001 		|	非法调用
-|1001 		|	版本太低啦~~~~~~~~~
+|E1000 		|	非法调用
+|E1001 		|	客户端版本太低.
+|E1002 		|	您查看的优惠信息不存在
+|&nbsp; 	|	&nbsp;
+|E1404 		|	接口地址不存在
 
 ----------
 #基础接口部分
@@ -281,8 +284,9 @@ http://www.wise-mall.com
         id: '商户ID',
         category: '商户类型',
         address: '商户地址',
+        area: '楼区',
         floor: '楼层',
-        storeNo: '房间号',
+        roomNum: '房间号',
         tel: '商户电话',
         mapid: '商户地址ID'
         },
@@ -291,11 +295,12 @@ http://www.wise-mall.com
      type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
      tag: '优惠标签',
      images: ['优惠图'...],
-     description: '详情',
+     description: '详情描述',
+     instruction: '优惠券使用说明',
      collectType: '下载方式'            // 0: 免费下, 1: 分享后下载
      collectLimit: '限量'              // 0: 不限制; N: 限制下载N次,
      collectRole: '下载规则'            // 待定, 目前返回空串,统一处理为每人限下载一次
-     userCollectCount: '我的下载次数',       // 根据role不同会有不同的处理情况,目前总是返回1.
+     userCollectCount: '我的下载次数',       // 根据role不同会有不同的处理情况,目前已下载返回1,未下载返回0.
      collectCount: '下载数',            // 已下载总量
      commentCount: '评论数',
      startTime: '开始时间',
