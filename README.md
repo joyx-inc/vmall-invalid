@@ -299,7 +299,7 @@ http://www.wise-mall.com
      instruction: '优惠券使用说明',
      collectType: '下载方式'            // 0: 免费下, 1: 分享后下载
      collectLimit: '限量'              // 0: 不限制; N: 限制下载N次,
-     collectRole: '下载规则'            // 待定, 目前返回空串,统一处理为每人限下载一次
+     collectRole: '下载规则'            // 待定, 目前返回空,统一处理为每人限下载一次
      userCollectCount: '我的下载次数',       // 根据role不同会有不同的处理情况,目前已下载返回1,未下载返回0.
      collectCount: '下载数',            // 已下载总量
      commentCount: '评论数',
