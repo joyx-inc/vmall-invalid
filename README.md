@@ -95,7 +95,7 @@ http://www.wise-mall.com
 #基础接口部分
 
 
-[初始化接口](id:anchor_init)
+[初始化接口](id:anchor_init)[√]
 ---------
 
 客户端启动时的初始化接口，主要用于：
@@ -231,7 +231,7 @@ http://www.wise-mall.com
 
 #优惠页面
 
-优惠接口
+优惠接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/coupon?`<系统参数>`&like=`<0：默认，1：关注的商户对应的优惠劵>`&`<查询参数>`
@@ -279,7 +279,7 @@ http://www.wise-mall.com
     }
 
 
-优惠详细信息接口
+优惠详细信息接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/coupon_detail?`<系统参数>`&couponid=`<优惠id>`
@@ -321,7 +321,7 @@ http://www.wise-mall.com
      }
 ```
 
-优惠券下载接口
+优惠券下载接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/coupon_download?`<系统参数>`&couponid=`<优惠id>`
@@ -337,7 +337,7 @@ http://www.wise-mall.com
      }
 
 
-优惠分类接口
+优惠分类接口[√]
 ---------
 与商户分类接口一致
 > 接口地址：api/<商场编号>/shop/category?`<系统参数>`&page=<页数>&amount=<分页条数>
@@ -362,14 +362,14 @@ http://www.wise-mall.com
     }
 
 
-优惠关注接口
+优惠关注接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/coupon_focus/up?`<系统参数>`&couponid=`<优惠id>`
 > 请求方式：GET
 
 
-优惠关注取消接口
+优惠关注取消接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/coupon_focus/down?`<系统参数>`&couponid=`<优惠id>`
@@ -403,7 +403,7 @@ http://www.wise-mall.com
 
 #商户
 
-商户列表接口
+商户列表接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/shop?`<系统参数>`&like=`<0：默认，1：关注的商户>`&`<查询参数>`
@@ -439,7 +439,7 @@ http://www.wise-mall.com
         ]                    
     }
 
-商户详细信息接口
+商户详细信息接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/shop_detail?`<系统参数>`&shopid=`<商户id>`&commentSize=`<查询的评论数>`&couponSize=`<查询的优惠数>`
@@ -484,7 +484,7 @@ http://www.wise-mall.com
 
 
 
-商户关注接口
+商户关注接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/shop_focus/up?`<系统参数>`
@@ -492,7 +492,7 @@ http://www.wise-mall.com
 > 请求参数: shopid=`<商户id,商户id...>`
 
 
-商户关注取消接口
+商户关注取消接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/shop_focus/down?`<系统参数>`
@@ -500,7 +500,7 @@ http://www.wise-mall.com
 > 请求参数: shopid=`<商户id,商户id...>`
 
 
-商户楼层接口
+商户楼层接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/shop/floor?`<系统参数>`&areaId=<楼区>
@@ -524,7 +524,7 @@ http://www.wise-mall.com
         ]                    
     }
 
-商户分类接口
+商户分类接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/shop/category?`<系统参数>`&page=<页数>&amount=<分页条数>
