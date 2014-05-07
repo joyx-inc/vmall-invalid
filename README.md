@@ -215,7 +215,7 @@ http://www.wise-mall.com
              id: '优惠ID',
              title: '优惠标题',
              type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
-             tag: '优惠标签',
+             hotTag: '优惠HOT标签',
              image: '优惠图',
              collectCount: '下载数',
              commentCount: '评论数',
@@ -264,8 +264,11 @@ http://www.wise-mall.com
              id: '优惠ID',
              title: '优惠标题',
              type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
-             tag: '优惠标签',
+             hotTag: '优惠HOT标签',
+             isFocus: '是否已关注',            // 1: 已关注; 0: 未关注
              image: '优惠图',
+             pixelWith: '图片宽',
+             pixelHeight: '图片高',
              collectCount: '下载数',
              commentCount: '评论数',
              focusCount: '关注数',
@@ -301,7 +304,7 @@ http://www.wise-mall.com
      id: '优惠ID',
      title: '优惠标题',
      type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
-     tag: '优惠标签',
+     hotTag: '优惠HOT标签',
      images: ['优惠图'...],
      description: '详情描述',
      instruction: '优惠券使用说明',
@@ -439,7 +442,7 @@ http://www.wise-mall.com
 商户详细信息接口
 ---------
 
-> 接口地址：api/<商场编号>/shop_detail?`<系统参数>`&shopid=`<商户id>`
+> 接口地址：api/<商场编号>/shop_detail?`<系统参数>`&shopid=`<商户id>`&commentSize=`<查询的评论数>`&couponSize=`<查询的优惠数>`
 > 请求方式：GET
 
 
@@ -466,7 +469,7 @@ http://www.wise-mall.com
              id: '优惠ID',
              title: '优惠标题',
              type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
-             tag: '优惠标签',
+             hotTag: '优惠HOT标签',
              image: '优惠图',
             }...
         ],
@@ -661,7 +664,7 @@ response code:200 OK
              id: '优惠ID',
              title: '优惠标题',
              type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
-             tag: '优惠标签',
+             hotTag: '优惠HOT标签',
              image: '优惠图',
              collectCount: '下载数',
              commentCount: '评论数',
