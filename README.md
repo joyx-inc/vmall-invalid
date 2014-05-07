@@ -503,15 +503,15 @@ http://www.wise-mall.com
 商户楼层接口
 ---------
 
-> 接口地址：api/<商场编号>/shop/floor?`<系统参数>`&page=<页数>&amount=<分页条数>
+> 接口地址：api/<商场编号>/shop/floor?`<系统参数>`&areaId=<楼区>
 > 请求方式：GET
 
 
     //JSON结构
     {
-        "totalCount":<总页数>,
-        "currentPage":<当前页>,
-        "floors":[                         //优惠列表
+        
+        "areaId":<当前楼区>,
+        "floors":[                         //楼层列表
              {
              id: 'ID',
              name: '名称'
