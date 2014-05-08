@@ -80,6 +80,13 @@ http://www.wise-mall.com
 ####错误消息定义<待完善>
 |编号		|描述		|
 | :--------: | :-- |
+|E4001 		|	已绑定过手机号,不能重复绑定
+|E4002 		|	无效的手机号.
+|E4003 		|	发送短信频率太高
+|E4004 		|	短信验证码不正确
+|&nbsp; 	|	&nbsp;
+|E3001 		|	商户信息不存在
+|&nbsp; 	|	&nbsp;
 |E2001 		|	您查看的优惠信息不存在
 |E2002 		|	优惠券已下载过.
 |E2003 		|	不符合此优惠券的下载条件
@@ -120,10 +127,10 @@ http://www.wise-mall.com
 > 
     //JSON结构
     {
-        "mallId":"<商场id>",
+        "mallId":"<商场id>",                    // **int**
         "mallCode":"<商场编号>",
         "mallName":"<商场名称>",
-        "mallMapId":"<商场地图id>",
+        "mallMapCode":"<商场地图id>",            // **int**
         "mallLogo":"<商场Logo>",               // logo地址
         "appName":"<app内部显示的名称>",       //待定！！
         "date":"<服务器当前时间>",             //主要用于秒杀活动等，客户端比较本地时间
@@ -209,17 +216,17 @@ http://www.wise-mall.com
                 {
                 title: '商户名称',
                 logo: '商户LOGO',
-                id: '商户ID',
-                category: '商户类型'
+                id: '商户ID',               // **int**
+                category: '商户类型'         // **int**
                 },
-             id: '优惠ID',
+             id: '优惠ID',                  // **int**
              title: '优惠标题',
-             type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+             type: '优惠类型',              // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
              hotTag: '优惠HOT标签',
              image: '优惠图',
-             collectCount: '下载数',
-             commentCount: '评论数',
-             focusCount: '关注数',
+             collectCount: '下载数',        // **int**
+             commentCount: '评论数',        // **int**
+             focusCount: '关注数',          // **int**
              startTime: '开始时间',
              endTime: '结束时间'
              }
@@ -242,7 +249,7 @@ http://www.wise-mall.com
 
 | key       |    类型   | required  | 描述  |
 | :-------- | --------:| :--: | :-- |
-| cid  | string |  N   |  分类id  |
+| cid  | int |  N   |  分类id  |
 | order      |    string | N  | 排序  value:优惠、楼层、人气、名称
 | amount     |   int |  Y   |  每页条数  |
 | page     |   int |  Y   |  请求的页数  |
@@ -258,20 +265,20 @@ http://www.wise-mall.com
                 {
                 title: '商户名称',
                 logo: '商户LOGO',
-                id: '商户ID',
-                category: '商户类型'
+                id: '商户ID',              // **int**
+                category: '商户类型'        // **int**
                 },
-             id: '优惠ID',
+             id: '优惠ID',                 // **int**
              title: '优惠标题',
-             type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+             type: '优惠类型',              // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
              hotTag: '优惠HOT标签',
-             isFocus: '是否已关注',            // 1: 已关注; 0: 未关注
+             isFocus: '是否已关注',         // **int** 1: 已关注; 0: 未关注
              image: '优惠图',
-             pixelWith: '图片宽',
-             pixelHeight: '图片高',
-             collectCount: '下载数',
-             commentCount: '评论数',
-             focusCount: '关注数',
+             pixelWith: '图片宽',            // **int**
+             pixelHeight: '图片高',          // **int**
+             collectCount: '下载数',        // **int**
+             commentCount: '评论数',        // **int**
+             focusCount: '关注数',          // **int**
              startTime: '开始时间',
              endTime: '结束时间'
              }
@@ -285,41 +292,47 @@ http://www.wise-mall.com
 > 接口地址：api/<商场编号>/coupon_detail?`<系统参数>`&couponid=`<优惠id>`
 > 请求方式：GET
 
-```json
+
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| couponid  | int |  Y   |  优惠id  |
 
     //JSON结构
     {'store':                         // 优惠对应的商户信息
         {
         title: '商户名称',
         logo: '商户LOGO',
-        id: '商户ID',
-        category: '商户类型',
+        id: '商户ID',                // **int**
+        category: '商户类型',         // **int**
         address: '商户地址',
         area: '楼区',
         floor: '楼层',
         roomNum: '房间号',
         tel: '商户电话',
-        mapid: '商户地址ID'
+        mapCode: '商户地图ID'        
         },
-     id: '优惠ID',
+     id: '优惠ID',                 // **int**
      title: '优惠标题',
-     type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+     type: '优惠类型',              // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
      hotTag: '优惠HOT标签',
      images: ['优惠图'...],
      description: '详情描述',
      instruction: '优惠券使用说明',
-     collectType: '下载方式'            // 0: 免费下, 1: 分享后下载
-     collectLimit: '限量'              // 0: 不限制; N: 限制下载N次,
+     collectType: '下载方式'            // **int** 0: 免费下, 1: 分享后下载
+     collectLimit: '限量'              // **int** 0: 不限制; N: 限制下载N次,
      collectRole: '下载规则'            // 待定, 目前返回空,统一处理为每人限下载一次
-     userCollectCount: '我的下载次数',       // 根据role不同会有不同的处理情况,目前已下载返回1,未下载返回0.
-     collectCount: '下载数',            // 已下载总量
-     commentCount: '评论数',
-     focusCount: '关注数',
+     userCollectCount: '我的下载次数',   // **int** 根据role不同会有不同的处理情况,目前已下载返回1,未下载返回0.
+     collectCount: '下载数',            // **int** 已下载总量
+     commentCount: '评论数',            // **int**
+     focusCount: '关注数',              // **int**
      startTime: '开始时间',
      endTime: '结束时间',
      date:"<服务器当前时间>"
      }
-```
+
+
 
 优惠券下载接口[√]
 ---------
@@ -327,12 +340,18 @@ http://www.wise-mall.com
 > 接口地址：api/<商场编号>/coupon_download?`<系统参数>`&couponid=`<优惠id>`
 > 请求方式：GET
 
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| couponid  | int |  Y   |  优惠id  |
+
 
     //JSON结构
     {
-     status: '下载结果',            // 1: 成功; 2: X; 3: 失败-已下载过; 4: 失败-不符合参与条件
+     status: '下载结果',            // **int** 1: 成功; 2: X; 3: 失败-已下载过; 4: 失败-不符合参与条件
      msg: '提示信息',               // 失败的提示信息
-     coupon_code: '优惠代码',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+     coupon_code: '优惠代码',       // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
      date":"<服务器当前时间>"
      }
 
@@ -343,18 +362,25 @@ http://www.wise-mall.com
 > 接口地址：api/<商场编号>/shop/category?`<系统参数>`&page=<页数>&amount=<分页条数>
 > 请求方式：GET
 
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| amount     |   int |  N   |  每页条数  |
+| page     |   int |  N   |  请求的页数  |
+
 
     //JSON结构
     {
-        "totalCount":<总页数>,
-        "currentPage":<当前页>,
+        "totalCount":<总页数>,                // **int**
+        "currentPage":<当前页>,               // **int**
         "categories":[                         //优惠列表
              {
-             id: '分类ID',
+             id: '分类ID',                    // **int**
              name: '分类名称'
              },
              {
-             id: '分类ID',
+             id: '分类ID',                    // **int**
              name: '分类名称'
              },
              ...
@@ -368,12 +394,24 @@ http://www.wise-mall.com
 > 接口地址：api/<商场编号>/coupon_focus/up?`<系统参数>`&couponid=`<优惠id>`
 > 请求方式：GET
 
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| couponid  | int |  Y   |  优惠id  |
+
 
 优惠关注取消接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/coupon_focus/down?`<系统参数>`&couponid=`<优惠id>`
 > 请求方式：GET
+
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| couponid  | int |  Y   |  优惠id  |
 
 
 
@@ -392,8 +430,8 @@ http://www.wise-mall.com
         {服务对象},{服务对象},{服务对象},...
         {
             "name":"对象名称",
-            "itemType":"对象类型",      //  #1:内置功能; 0: 网页
-            "itemId":"对象id",
+            "itemType":"对象类型",      // **int**  1:内置功能; 0: 网页
+            "itemId":"对象id",         // **int**
             "picUrl":"图片地址"
             "link":"链接地址"           // itemType为0的时候才有值
         }
@@ -403,7 +441,7 @@ http://www.wise-mall.com
 
 #商户
 
-商户列表接口[√]
+[商户列表接口](id:shop_list)[√]
 ---------
 
 > 接口地址：api/<商场编号>/shop?`<系统参数>`&like=`<0：默认，1：关注的商户>`&`<查询参数>`
@@ -429,12 +467,13 @@ http://www.wise-mall.com
             {
             title: '商户名称',
             logo: '商户LOGO',
-            id: '商户ID',
-            category: '商户类型',
+            id: '商户ID',                // **int**
+            category: '商户类型',         // **int**
+            categoryName: '商户类型名称'
             area: '楼区',
             floor: '楼层',
             roomNum: '商户房间号',
-            followerCount: '关注人数'
+            followerCount: '关注人数'     // **int**
             }...
         ]                    
     }
@@ -445,6 +484,14 @@ http://www.wise-mall.com
 > 接口地址：api/<商场编号>/shop_detail?`<系统参数>`&shopid=`<商户id>`&commentSize=`<查询的评论数>`&couponSize=`<查询的优惠数>`
 > 请求方式：GET
 
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| shopid  | int |  Y   |  商户id  |
+| commentSize     |   int |  N   |  每页条数,默认为5  |
+| couponSize     |   int |  N   |  请求的页数,默认为5  |
+
 
     //JSON结构
     {                                       //商户对象
@@ -454,21 +501,18 @@ http://www.wise-mall.com
 
         title: '商户名称',
         logo: '商户LOGO',
-        id: '商户ID',
-        category: '商户类型',
+        id: '商户ID',                    // **int**
+        category: '商户类型',             // **int**
         floor: '楼层',
         roomNum: '商户房间号',
         description: '介绍',
         followerCount: '关注人数',
-        特殊属性: '特殊属性',
-        特殊属性: '特殊属性',
-        特殊属性: '特殊属性',
-        特殊属性: '特殊属性',
+        mapCode: '商户地图ID'
         coupons:[                           // 商户的优惠劵
             {
-             id: '优惠ID',
+             id: '优惠ID',                // **int**
              title: '优惠标题',
-             type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+             type: '优惠类型',             // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
              hotTag: '优惠HOT标签',
              image: '优惠图',
             }...
@@ -491,6 +535,12 @@ http://www.wise-mall.com
 > 请求方式：POST
 > 请求参数: shopid=`<商户id,商户id...>`
 
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| shopid  | string |  Y   |  商户id逗号拼接  |
+
 
 商户关注取消接口[√]
 ---------
@@ -499,12 +549,24 @@ http://www.wise-mall.com
 > 请求方式：POST
 > 请求参数: shopid=`<商户id,商户id...>`
 
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| shopid  | string |  Y   |  商户id逗号拼接  |
+
 
 商户楼层接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/shop/floor?`<系统参数>`&areaId=<楼区>
 > 请求方式：GET
+
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| areaId  | int |  N   |  暂时只处理一栋楼的情况,默认为0  |
 
 
     //JSON结构
@@ -513,11 +575,11 @@ http://www.wise-mall.com
         "areaId":<当前楼区>,
         "floors":[                         //楼层列表
              {
-             id: 'ID',
+             id: 'ID',                    // **int**
              name: '名称'
              },
              {
-             id: 'ID',
+             id: 'ID',                    // **int**
              name: '名称'
              },
              ...
@@ -530,6 +592,13 @@ http://www.wise-mall.com
 > 接口地址：api/<商场编号>/shop/category?`<系统参数>`&page=<页数>&amount=<分页条数>
 > 请求方式：GET
 
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| amount     |   int |  N   |  每页条数  |
+| page     |   int |  N   |  请求的页数  |
+
 
     //JSON结构
     {
@@ -537,7 +606,7 @@ http://www.wise-mall.com
         "currentPage":<当前页>,
         "categories":[                         //优惠列表
              {
-             id: 'ID',
+             id: 'ID',                        // **int**
              name: '名称'
              },
              {
@@ -551,7 +620,7 @@ http://www.wise-mall.com
 
 #我的信息
 
-用户基本信息接口
+用户基本信息接口[√]
 ---------
 
 > 接口地址：api/<商场编号>/myinfo?`<系统参数>`
@@ -561,27 +630,35 @@ http://www.wise-mall.com
     //JSON结构
     {
         name: "姓名",
-        gender: "性别",
-        nick_name: "昵称",
+        gender: "性别",            // **int** 0: 保密; 1: 男; 2: 女
+        nickName: "昵称",
         mobile: "手机号",
-        club_card: "会员卡号",
+        clubCard: "会员卡号",
     }
 
 
-修改用户基本信息接口
+修改用户基本信息接口[√]
 ---------
 
-> 接口地址：api/<商场编号>/myinfo?**update**&`<系统参数>`
+> 接口地址：api/<商场编号>/myinfo?`<系统参数>`
 > 请求方式：**PUT**
-> 请求体：`{用户基本信息}`
-> 
-> **响应：**
+
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| name     |   string |  N   |  姓名  |
+| gender     |   int |  N   |  性别  |
+| nickName     |   string |  N   |  昵称  |
+
+
+**响应：**
 response code:200 OK
 
 
 
 
-我的优惠劵接口
+我的优惠劵接口[√]
 ---------
 > 接口地址：api/<商场编号>/myinfo/coupons_download?`<系统参数>`
 > 请求方式：GET
@@ -596,13 +673,13 @@ response code:200 OK
                 {
                 title: '商户名称',
                 logo: '商户LOGO',
-                id: '商户ID',
-                category: '商户类型'
+                id: '商户ID',              // **int**
+                category: '商户类型'        // **int**
                 },
-             id: '优惠ID',
+             id: '优惠ID',                 // **int**
              title: '优惠标题',
              coupon_code: '优惠券代码',
-             coupon_status: '优惠券状态',  // ('0', '未消费'), ('1', '已消费')
+             coupon_status: '优惠券状态',   // **int** ('0', '未消费'), ('1', '已消费')
              startTime: '开始时间',
              endTime: '结束时间'
              }
@@ -616,25 +693,26 @@ response code:200 OK
 
 
 
-我关注的商家接口
+我关注的商家接口[√]
 ---------
-
+参数和返回结果与[商户接口](#商户接口)一致,只是接口地址不一样
 > 接口地址：api/<商场编号>/myinfo/shop?`<系统参数>`&`<查询参数>`
 > 请求方式：GET
 
     //JSON结构
     {
-        "totalCount":<总页数>,
-        "currentPage":<当前页>,
+        "totalCount":<总页数>,            // **int**
+        "currentPage":<当前页>,           // **int**
         "list":[                         //优惠列表
             {
             title: '商户名称',
             logo: '商户LOGO',
-            id: '商户ID',
-            category: '商户类型',
+            id: '商户ID',                // **int**
+            category: '商户类型',         // **int**
+            area: '楼区',
             floor: '楼层',
             roomNum: '商户房间号',
-            followerCount: '关注人数'
+            followerCount: '关注人数'     // **int**
             }...
         ]
     }
@@ -643,9 +721,9 @@ response code:200 OK
 我关注的商品接口？？？
 ---------
 
-我关注的优惠接口
+我关注的优惠接口[√]
 ---------
-> 接口地址：api/<商场编号>/myinfo/coupons_focus?`<系统参数>`&`<查询参数>`
+> 接口地址：api/<商场编号>/myinfo/coupons_focus?`<系统参数>`
 > 请求方式：GET
 
 
@@ -658,17 +736,17 @@ response code:200 OK
                 {
                 title: '商户名称',
                 logo: '商户LOGO',
-                id: '商户ID',
-                category: '商户类型'
+                id: '商户ID',              // **int**
+                category: '商户类型'        // **int**
                 },
-             id: '优惠ID',
+             id: '优惠ID',                // **int**
              title: '优惠标题',
-             type: '优惠类型',              // 1: 优惠活动; 2: 优惠券; 3: 团购;
+             type: '优惠类型',              // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
              hotTag: '优惠HOT标签',
              image: '优惠图',
-             collectCount: '下载数',
-             commentCount: '评论数',
-             focusCount: '关注数',
+             collectCount: '下载数',        // **int**
+             commentCount: '评论数',        // **int**
+             focusCount: '关注数',          // **int**
              startTime: '开始时间',
              endTime: '结束时间'
              }
@@ -677,64 +755,96 @@ response code:200 OK
     }
 
 
-绑定手机接口-发送短信
+绑定手机接口-发送短信[√]
 ---------
 > 接口地址：api/<商场编号>/myinfo/send_sms?`<系统参数>`&phonenum=`<手机号>`
 > 请求方式：GET
 
+**参数：**
 
-绑定手机接口-保存手机号
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| phonenum     |   string |  Y   |  手机号  |
+
+
+绑定手机接口-保存手机号[√]
 ---------
 > 接口地址：api/<商场编号>/myinfo/save_phonenum?`<系统参数>`&phonenum=`<手机号>`&code=`<短信中的验证码>`
 > 请求方式：GET
 
+**参数：**
 
-绑定会员卡接口
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| phonenum     |   string |  Y   |  手机号  |
+| code     |   int |  Y   |  短信中的验证码  |
+
+
+绑定会员卡接口[√]
 ---------
 
 
 > 接口地址：api/<商场编号>/myinfo/club_card?`<系统参数>`&club_card=<卡号>
 > 请求方式：PUT
 
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| club_card     |   string |  Y   |  会员卡号  |
 
 
-绑定银行卡接口
+
+绑定银行卡接口[√]
 ---------
 取银行列表
-> 接口地址：api/<商场编号>/myinfo/bank_list?`<系统参数>`
+> 接口地址：api/<商场编号>/bank_list?`<系统参数>`
 > 请求方式：GET
 
     //JSON结构
     [
         {
-        bank_id..<银行ID>
-        bank_name..<银行名称>
+        bankId..<银行ID>            // **int**
+        bankName..<银行名称>
         }
         ...
     ]
 
-取我的卡列表
+取我的卡列表[√]
 > 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`
 > 请求方式：GET
 
     //JSON结构
     [
         {
-            id: <卡ID>,
-            bank_id: <银行Id>,
-            bank_name: <银行名称>,
-            card_num: <卡号>,
+            id: <卡ID>,                 // **int**
+            bankId: <银行Id>,           // **int**
+            bankName: <银行名称>,
+            cardNum: <卡号>,
         }
     ]
 
-删除卡
-> 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`&card_id=<卡id>&card_id=<卡id>&card_id=<卡id>
+删除卡[√]
+> 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`&cardId=<卡id>&cardId=<卡id>&cardId=<卡id>
 > 请求方式：DELETE
 
+**参数：**
 
-新增卡
-> 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`&club_card=<卡号>&bank_id=<银行ID>
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| cardId     |   int |  Y   |  卡id  |
+
+
+新增卡[√]
+> 接口地址：api/<商场编号>/myinfo/bank_card?`<系统参数>`&cardNum=<卡号>&bankId=<银行ID>
 > 请求方式：PUT
+
+**参数：**
+
+| key       |    类型   | required  | 描述  |
+| :-------- | --------:| :--: | :-- |
+| cardNum     |   string |  Y   |  卡号  |
+| bankId     |   int |  Y   |  银行ID  |
 
 
 消息推送/提示接口
