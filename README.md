@@ -202,7 +202,7 @@ http://www.wise-mall.com
 | :-------- | --------:| :--: | :-- |
 | keyword  | string |  Y   |  关键字 或 一、二维码  |
 | type     |   int |  Y   |  查询类型：0：关键字查询 ，1：一、二维码查询  |
-| order      |    string | N  | 排序,如：name,asc 或 fav,desc    |
+| order      |    string | N  | 排序字段 [title, focus_count, collect_count, comment_count,endTime]    |
 | amount     |   int |  Y   |  每页条数  |
 | page     |   int |  Y   |  请求的页数  |
 
@@ -223,7 +223,10 @@ http://www.wise-mall.com
              title: '优惠标题',
              type: '优惠类型',              // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
              hotTag: '优惠HOT标签',
+             isFocus: '是否已关注',         // **boolean** true: 已关注; false: 未关注
              image: '优惠图',
+             pixelWith: '图片宽',            // **int**
+             pixelHeight: '图片高',          // **int**
              collectCount: '下载数',        // **int**
              commentCount: '评论数',        // **int**
              focusCount: '关注数',          // **int**
@@ -249,8 +252,8 @@ http://www.wise-mall.com
 
 | key       |    类型   | required  | 描述  |
 | :-------- | --------:| :--: | :-- |
-| cid  | int |  N   |  分类id  |
-| order      |    string | N  | 排序  value:优惠、楼层、人气、名称
+| cid  | int |  N   |  分类id  | 
+| order      |  string | N  | 排序字段 [title, focus_count, collect_count, comment_count,endTime] |
 | amount     |   int |  Y   |  每页条数  |
 | page     |   int |  Y   |  请求的页数  |
 
@@ -272,7 +275,7 @@ http://www.wise-mall.com
              title: '优惠标题',
              type: '优惠类型',              // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
              hotTag: '优惠HOT标签',
-             isFocus: '是否已关注',         // **int** 1: 已关注; 0: 未关注
+             isFocus: '是否已关注',         // **boolean** true: 已关注; false: 未关注
              image: '优惠图',
              pixelWith: '图片宽',            // **int**
              pixelHeight: '图片高',          // **int**
@@ -454,7 +457,7 @@ http://www.wise-mall.com
 | :-------- | --------:| :--: | :-- |
 | floor  | string |  N   |  楼层  |
 | cid  | string |  N   |  分类id  |
-| order      |    string | N  | 排序  value:优惠、楼层、人气、名称
+| order      |    string | N  | 排序字段 [title, follower_count, *floor*, *coupon_count*]
 | amount     |   int |  Y   |  每页条数  |
 | page     |   int |  Y   |  请求的页数  |
 
@@ -695,7 +698,7 @@ response code:200 OK
 
 我关注的商家接口[√]
 ---------
-参数和返回结果与[商户接口](#商户接口)一致,只是接口地址不一样
+参数和返回结果与[商户列表接口中link为1时](#shop_list)一致,只是接口地址不一样
 > 接口地址：api/<商场编号>/myinfo/shop?`<系统参数>`&`<查询参数>`
 > 请求方式：GET
 
