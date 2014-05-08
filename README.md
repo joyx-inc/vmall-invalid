@@ -217,7 +217,10 @@ http://www.wise-mall.com
                 title: '商户名称',
                 logo: '商户LOGO',
                 id: '商户ID',               // **int**
-                category: '商户类型'         // **int**
+                category: {
+                    id: '商户类型ID',        // **int**
+                    name: '商户类型名称'
+                    }
                 },
              id: '优惠ID',                  // **int**
              title: '优惠标题',
@@ -308,7 +311,10 @@ http://www.wise-mall.com
         title: '商户名称',
         logo: '商户LOGO',
         id: '商户ID',                // **int**
-        category: '商户类型',         // **int**
+        category: {
+            id: '商户类型ID',        // **int**
+            name: '商户类型名称'
+            }
         address: '商户地址',
         area: '楼区',
         floor: '楼层',
@@ -471,8 +477,10 @@ http://www.wise-mall.com
             title: '商户名称',
             logo: '商户LOGO',
             id: '商户ID',                // **int**
-            category: '商户类型',         // **int**
-            categoryName: '商户类型名称'
+            category: {
+                id: '商户类型ID',        // **int**
+                name: '商户类型名称'
+                }
             area: '楼区',
             floor: '楼层',
             roomNum: '商户房间号',
@@ -505,7 +513,10 @@ http://www.wise-mall.com
         title: '商户名称',
         logo: '商户LOGO',
         id: '商户ID',                    // **int**
-        category: '商户类型',             // **int**
+        category: {
+            id: '商户类型ID',            // **int**
+            name: '商户类型名称'
+            }
         floor: '楼层',
         roomNum: '商户房间号',
         description: '介绍',
@@ -677,7 +688,10 @@ response code:200 OK
                 title: '商户名称',
                 logo: '商户LOGO',
                 id: '商户ID',              // **int**
-                category: '商户类型'        // **int**
+                category: {
+                    id: '商户类型ID',        // **int**
+                    name: '商户类型名称'
+                    }
                 },
              id: '优惠ID',                 // **int**
              title: '优惠标题',
@@ -711,7 +725,10 @@ response code:200 OK
             title: '商户名称',
             logo: '商户LOGO',
             id: '商户ID',                // **int**
-            category: '商户类型',         // **int**
+            category: {
+                id: '商户类型ID',        // **int**
+                name: '商户类型名称'
+                }
             area: '楼区',
             floor: '楼层',
             roomNum: '商户房间号',
@@ -740,7 +757,10 @@ response code:200 OK
                 title: '商户名称',
                 logo: '商户LOGO',
                 id: '商户ID',              // **int**
-                category: '商户类型'        // **int**
+                category: {
+                    id: '商户类型ID',        // **int**
+                    name: '商户类型名称'
+                    }
                 },
              id: '优惠ID',                // **int**
              title: '优惠标题',
