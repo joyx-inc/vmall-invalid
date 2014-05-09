@@ -517,6 +517,8 @@ http://www.wise-mall.com
             id: '商户类型ID',            // **int**
             name: '商户类型名称'
             }
+        
+        area: '楼区',
         floor: '楼层',
         roomNum: '商户房间号',
         description: '介绍',
