@@ -523,9 +523,7 @@ http://www.wise-mall.com
         roomNum: '商户房间号',
         description: '介绍',
         followerCount: '关注人数',
-        image: '优惠图',
-        pixelWith: '图片宽',            // **int**
-        pixelHeight: '图片高',          // **int**
+        image: '优惠图',                // banner背景图
         mapCode: '商户地图ID'
         coupons:[                           // 商户的优惠劵
             {
