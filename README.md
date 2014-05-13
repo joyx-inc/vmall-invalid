@@ -397,7 +397,7 @@ http://www.wise-mall.com
     }
 
 
-优惠关注接口[√]
+~~优惠关注接口~~[√]
 ---------
 
 > 接口地址：api/<商场编号>/coupon_focus/up?`<系统参数>`&couponid=`<优惠id>`
@@ -410,7 +410,7 @@ http://www.wise-mall.com
 | couponid  | int |  Y   |  优惠id  |
 
 
-优惠关注取消接口[√]
+~~优惠关注取消接口~~[√]
 ---------
 
 > 接口地址：api/<商场编号>/coupon_focus/down?`<系统参数>`&couponid=`<优惠id>`
@@ -523,6 +523,9 @@ http://www.wise-mall.com
         roomNum: '商户房间号',
         description: '介绍',
         followerCount: '关注人数',
+        image: '优惠图',
+        pixelWith: '图片宽',            // **int**
+        pixelHeight: '图片高',          // **int**
         mapCode: '商户地图ID'
         coupons:[                           // 商户的优惠劵
             {
@@ -712,9 +715,9 @@ response code:200 OK
 
 
 
-我关注的商家接口[√]
+~~我关注的商家接口~~[√]
 ---------
-参数和返回结果与[商户列表接口中link为1时](#shop_list)一致,只是接口地址不一样
+参数和返回结果与[商户列表接口中like为1时](#shop_list)一致,只是接口地址不一样
 > 接口地址：api/<商场编号>/myinfo/shop?`<系统参数>`&`<查询参数>`
 > 请求方式：GET
 
@@ -743,7 +746,7 @@ response code:200 OK
 我关注的商品接口？？？
 ---------
 
-我关注的优惠接口[√]
+~~我关注的优惠接口~~[√]
 ---------
 > 接口地址：api/<商场编号>/myinfo/coupons_focus?`<系统参数>`
 > 请求方式：GET
