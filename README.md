@@ -226,7 +226,6 @@ http://www.wise-mall.com
              title: '优惠标题',
              type: '优惠类型',              // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
              hotTag: '优惠HOT标签',
-             isFocus: '是否已关注',         // **boolean** true: 已关注; false: 未关注
              image: '优惠图',
              pixelWith: '图片宽',            // **int**
              pixelHeight: '图片高',          // **int**
@@ -278,7 +277,6 @@ http://www.wise-mall.com
              title: '优惠标题',
              type: '优惠类型',              // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
              hotTag: '优惠HOT标签',
-             isFocus: '是否已关注',         // **boolean** true: 已关注; false: 未关注
              image: '优惠图',
              pixelWith: '图片宽',            // **int**
              pixelHeight: '图片高',          // **int**
@@ -360,7 +358,7 @@ http://www.wise-mall.com
     {
      status: '下载结果',            // **int** 1: 成功; 2: X; 3: 失败-已下载过; 4: 失败-不符合参与条件
      msg: '提示信息',               // 失败的提示信息
-     coupon_code: '优惠代码',       // **int** 1: 优惠活动; 2: 优惠券; 3: 团购;
+     coupon_code: '优惠代码',       // 
      date":"<服务器当前时间>"
      }
 
@@ -524,6 +522,7 @@ http://www.wise-mall.com
         description: '介绍',
         followerCount: '关注人数',
         image: '优惠图',                // banner背景图
+        isFocus: '是否已关注',         // **boolean** true: 已关注; false: 未关注
         mapCode: '商户地图ID'
         coupons:[                           // 商户的优惠劵
             {
