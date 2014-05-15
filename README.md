@@ -314,9 +314,14 @@ http://www.wise-mall.com
             name: '商户类型名称'
             }
         address: '商户地址',
-        area: '楼区',
-        floor: '楼层',
-        roomNum: '房间号',
+        pos: {
+                area: '楼区',
+                areaId: '楼区ID',
+                floor: '楼层',
+                floorId: '楼层ID',
+                roomNum: '商户房间号'
+                mapCode: '地图编号'
+            },
         tel: '商户电话',
         mapCode: '商户地图ID'        
         },
@@ -479,9 +484,14 @@ http://www.wise-mall.com
                 id: '商户类型ID',        // **int**
                 name: '商户类型名称'
                 }
-            area: '楼区',
-            floor: '楼层',
-            roomNum: '商户房间号',
+            pos: {
+                area: '楼区',
+                areaId: '楼区ID',
+                floor: '楼层',
+                floorId: '楼层ID',
+                roomNum: '商户房间号'
+                mapCode: '地图编号'
+            },
             followerCount: '关注人数'     // **int**
             }...
         ]                    
@@ -516,9 +526,14 @@ http://www.wise-mall.com
             name: '商户类型名称'
             }
         
-        area: '楼区',
-        floor: '楼层',
-        roomNum: '商户房间号',
+        pos: {
+                area: '楼区',
+                areaId: '楼区ID',
+                floor: '楼层',
+                floorId: '楼层ID',
+                roomNum: '商户房间号'
+                mapCode: '地图编号'
+            },
         description: '介绍',
         followerCount: '关注人数',
         image: '优惠图',                // banner背景图
@@ -731,9 +746,14 @@ response code:200 OK
                 id: '商户类型ID',        // **int**
                 name: '商户类型名称'
                 }
-            area: '楼区',
-            floor: '楼层',
-            roomNum: '商户房间号',
+            pos: {
+                area: '楼区',
+                areaId: '楼区ID',
+                floor: '楼层',
+                floorId: '楼层ID',
+                roomNum: '商户房间号'
+                mapCode: '地图编号'
+            },
             followerCount: '关注人数'     // **int**
             }...
         ]
