@@ -322,8 +322,7 @@ http://www.wise-mall.com
                 roomNum: '商户房间号'
                 mapCode: '地图编号'
             },
-        tel: '商户电话',
-        mapCode: '商户地图ID'        
+        tel: '商户电话'       
         },
      id: '优惠ID',                 // **int**
      title: '优惠标题',
@@ -536,9 +535,8 @@ http://www.wise-mall.com
             },
         description: '介绍',
         followerCount: '关注人数',
-        image: '优惠图',                // banner背景图
+        image: 'banner背景图',                // banner背景图
         isFocus: '是否已关注',         // **boolean** true: 已关注; false: 未关注
-        mapCode: '商户地图ID'
         coupons:[                           // 商户的优惠劵
             {
              id: '优惠ID',                // **int**
