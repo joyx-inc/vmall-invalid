@@ -132,6 +132,7 @@ http://www.wise-mall.com
         "mallName":"<商场名称>",
         "mallMapCode":"<商场地图id>",            // **int**
         "mallLogo":"<商场Logo>",               // logo地址
+        "buildingCount":"<楼宇数>",               // 楼宇数
         "appName":"<app内部显示的名称>",       //待定！！
         "date":"<服务器当前时间>",             //主要用于秒杀活动等，客户端比较本地时间
         "isNewUser":<是否为新用户>,
@@ -597,10 +598,35 @@ http://www.wise-mall.com
 | shopid  | string |  Y   |  商户id逗号拼接  |
 
 
-商户楼层接口[√]
+楼宇接口[√]
 ---------
 
-> 接口地址：api/<商场编号>/shop/floor?`<系统参数>`&buildingId=<楼宇ID>
+> 接口地址：api/<商场编号>/building?`<系统参数>`
+> 请求方式：GET
+
+
+    //JSON结构
+    {
+        
+        "buildings":[                         //楼宇列表
+             {
+             id: 'ID',                    // **int**
+             name: '名称',
+             mapCode: '地图编号'
+             },
+             {
+             id: 'ID',                    // **int**
+             name: '名称',
+             mapCode: '地图编号'
+             },
+             ...
+        ]                    
+    }
+
+楼层接口[√]
+---------
+
+> 接口地址：api/<商场编号>/building/floor?`<系统参数>`&buildingId=<楼宇ID>
 > 请求方式：GET
 
 **参数：**
@@ -617,11 +643,13 @@ http://www.wise-mall.com
         "floors":[                         //楼层列表
              {
              id: 'ID',                    // **int**
-             name: '名称'
+             name: '名称',
+             mapCode: '地图编号'
              },
              {
              id: 'ID',                    // **int**
-             name: '名称'
+             name: '名称',
+             mapCode: '地图编号'
              },
              ...
         ]                    
