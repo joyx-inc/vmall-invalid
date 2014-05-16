@@ -314,13 +314,17 @@ http://www.wise-mall.com
             name: '商户类型名称'
             }
         address: '商户地址',
-        pos: {
-                area: '楼区',
-                areaId: '楼区ID',
-                floor: '楼层',
-                floorId: '楼层ID',
-                roomNum: '商户房间号'
-                mapCode: '地图编号'
+        pos": {
+                "mapCode": "地图编号",
+                "building": {
+                    "id": 楼宇ID,        // **int**
+                    "name": "楼宇名称"
+                },
+                "floor": {
+                    "id": 楼层ID,        // **int**
+                    "name": "楼层名称"
+                },
+                "roomNum": "房间号"            
             },
         tel: '商户电话'       
         },
@@ -463,7 +467,8 @@ http://www.wise-mall.com
 
 | key       |    类型   | required  | 描述  |
 | :-------- | --------:| :--: | :-- |
-| floor  | string |  N   |  楼层  |
+| buildingId  | int |  N   |  楼宇  |
+| floorId  | int |  N   |  楼层  |
 | cid  | string |  N   |  分类id  |
 | order      |    string | N  | 排序字段 [title, follower_count, *floor*, *coupon_count*]
 | amount     |   int |  Y   |  每页条数  |
@@ -483,14 +488,18 @@ http://www.wise-mall.com
                 id: '商户类型ID',        // **int**
                 name: '商户类型名称'
                 }
-            pos: {
-                area: '楼区',
-                areaId: '楼区ID',
-                floor: '楼层',
-                floorId: '楼层ID',
-                roomNum: '商户房间号'
-                mapCode: '地图编号'
-            },
+            pos": {
+                "mapCode": "地图编号",
+                "building": {
+                    "id": 楼宇ID,        // **int**
+                    "name": "楼宇名称"
+                },
+                "floor": {
+                    "id": 楼层ID,        // **int**
+                    "name": "楼层名称"
+                },
+                "roomNum": "房间号"            
+            }
             followerCount: '关注人数'     // **int**
             }...
         ]                    
@@ -524,14 +533,17 @@ http://www.wise-mall.com
             id: '商户类型ID',            // **int**
             name: '商户类型名称'
             }
-        
-        pos: {
-                area: '楼区',
-                areaId: '楼区ID',
-                floor: '楼层',
-                floorId: '楼层ID',
-                roomNum: '商户房间号'
-                mapCode: '地图编号'
+        pos": {
+                "mapCode": "地图编号",
+                "building": {
+                    "id": 楼宇ID,        // **int**
+                    "name": "楼宇名称"
+                },
+                "floor": {
+                    "id": 楼层ID,        // **int**
+                    "name": "楼层名称"
+                },
+                "roomNum": "房间号"            
             },
         description: '介绍',
         followerCount: '关注人数',
@@ -588,20 +600,20 @@ http://www.wise-mall.com
 商户楼层接口[√]
 ---------
 
-> 接口地址：api/<商场编号>/shop/floor?`<系统参数>`&areaId=<楼区>
+> 接口地址：api/<商场编号>/shop/floor?`<系统参数>`&buildingId=<楼宇ID>
 > 请求方式：GET
 
 **参数：**
 
 | key       |    类型   | required  | 描述  |
 | :-------- | --------:| :--: | :-- |
-| areaId  | int |  N   |  暂时只处理一栋楼的情况,默认为0  |
+| buildingId  | int |  N   |  暂时只处理一栋楼的情况,默认为0  |
 
 
     //JSON结构
     {
         
-        "areaId":<当前楼区>,
+        "buildingId":<当前楼宇>,
         "floors":[                         //楼层列表
              {
              id: 'ID',                    // **int**
@@ -744,13 +756,17 @@ response code:200 OK
                 id: '商户类型ID',        // **int**
                 name: '商户类型名称'
                 }
-            pos: {
-                area: '楼区',
-                areaId: '楼区ID',
-                floor: '楼层',
-                floorId: '楼层ID',
-                roomNum: '商户房间号'
-                mapCode: '地图编号'
+            pos": {
+                "mapCode": "地图编号",
+                "building": {
+                    "id": 楼宇ID,        // **int**
+                    "name": "楼宇名称"
+                },
+                "floor": {
+                    "id": 楼层ID,        // **int**
+                    "name": "楼层名称"
+                },
+                "roomNum": "房间号"            
             },
             followerCount: '关注人数'     // **int**
             }...
